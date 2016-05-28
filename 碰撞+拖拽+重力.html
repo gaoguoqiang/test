@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#div1{width:100px;height:100px;background: red;position: absolute;top:0;left:0;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oDiv = document.getElementById('div1');
+			//speedX~~~speedY是初始速度
+			var speedX = 0;
+			var speedY = 0;
+			//lastX(Y)是鼠标拖拽时前一刻的位置
+			var lastX = 0;
+			var lastY = 0;
+			var timer = null;
+
+			oDiv.onmousedown = function(ev){
+				var ev = ev || event;
+				//获取鼠标当前位置
+				var disX = ev.clientX-this.offsetLeft;
+				var disY = ev.clientY-this.offsetTop;
+
+				document.onmousemove = function(ev){
+					var ev = ev || event;
+					//left~~~top值为鼠标当前位置减去鼠标按下时的位置
+					var l = ev.clientX-disX;
+					var t = ev.clientY-disY;
+					oDiv.style.left = l+'px';
+					oDiv.style.top = t+'px';
+					//元素当前位置减去上一刻的位置就是鼠标移动的距离
+					//把这个距离作为元素扔出去以后的初始速度
+					//拖得越快，速度越大
+					speedX = l-lastX;
+					speedY = t-lastY;
+					//更新上一刻的位置
+					lastX = l;
+					lastY = t;
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+					document.onmouseup = null;
+					startMove();
+				}
+				clearInterval(timer);
+			}
+			function startMove(){
+				clearInterval(timer);
+				timer = setInterval(function(){
+					//让纵轴的速度越来越大，因为物体下落的速度是越来越快的
+					speedY+=3;
+					var l = oDiv.offsetLeft+speedX;
+					var t = oDiv.offsetTop+speedY;
+					if(l >= document.documentElement.clientWidth-oDiv.offsetWidth){
+						//当元素碰到边的时候，他的速度越来越小，所以乘以一个小数
+						//而前当他碰到边的时候，他要向相反的方向运动，所以乘以一个负数
+						speedX*=-0.8;
+						//当他碰到边的时候，不可能正好贴着边，可能会超出一部分，所以会出现一个瞬间的滚动条，所以强行把他的位置固定到边界的位置
+						l = document.documentElement.clientWidth-oDiv.offsetWidth;
+					}else if(l<=0){
+						speedX*=-0.8;
+						l = 0;
+					}
+					if(t >= document.documentElement.clientHeight-oDiv.offsetHeight){
+						speedY*=-0.8;
+						speedX*=0.8
+						t = document.documentElement.clientHeight-oDiv.offsetHeight;
+					}else if(t <= 0){
+						speedY*=-1;
+						t = 0;
+					}
+					//当速度为一个负的小数的时候，元素还会继续运动
+					//所以强行让速度等于0
+					if(Math.abs(speedX)<1){
+						speedX = 0;
+					}
+					if(Math.abs(speedY)<1){
+						speedY = 0;
+					}
+					//停止条件：
+					//速度为0；
+					//纵坐标等于窗口可视高度-元素高度
+					if(speedX==0 && speedY == 0 && t == document.documentElement.clientHeight-oDiv.offsetHeight){
+						clearInterval(timer);
+					}else{
+						oDiv.style.left = l+'px';
+						oDiv.style.top = t+'px';
+					}
+					
+				},30)
+			}
+			//startMove();
+		}
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>
