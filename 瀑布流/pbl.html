@@ -21,19 +21,26 @@
 			var b = true;
 
 			function getList(){
+				//获取数据，ipage代表页数
 				ajax('get','getPics.php','cpage=' + iPage,function(data){
+					//解析数据格式
 					var data = JSON.parse(data);
+					//如果后续没有数据就不执行了
 					if(!data.length){
 						return;
 					}
+					//循环每一条数据
 					for(var i=0;i<data.length;i++){
+						//获取高度最短的一个li，把数据添加到里边
 						var _index = getShort();
 						var oDiv = document.createElement('div');
 						var oImg = document.createElement('img');
 						var oP = document.createElement('p');
 
 						oImg.src = data[i].preview;
+						//固定图片宽度
 						oImg.style.width = '225px';
+						//高度根据宽度的比例确定
 						oImg.style.height = data[i].height*(225/data[i].width)+'px';
 						oP.innerHTML = data[i].title;
 						oDiv.appendChild(oImg);
@@ -46,11 +53,14 @@
 			}
 			 getList();
 			
-
+			 //当最短的li出现在屏幕里，就加载下一页
 			window.onscroll = function(){
+				//获取最短的li
 				var _index = getShort();
 				var oLi = aLi[_index];
+				//获取窗口滚动的高度
 				var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+				//如果最短的 li 距离页面顶部的距离 + 自身的高度 > 窗口滚动距离 + 窗口高度  就加载下一页
 				if(getTop(oLi)+oLi.offsetHeight<document.documentElement.clientHeight+scrollTop){
 					if(b){
 						b = false;
@@ -61,6 +71,7 @@
 				}
 
 			}
+			//获取最短的li 返回最短li的位置（下标）
 			function getShort(){
 				var index = 0;
 				var ih = aLi[index].offsetHeight;
