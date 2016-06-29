@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#div1{width:100px;height:100px;background:red;position: absolute;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oDiv = document.getElementById('div1');
+			drag(oDiv)
+			
+			function drag(obj){
+
+				obj.onmousedown = function(ev){
+				var ev = ev || event;
+				//鼠标的实时位置-操作对象距离窗口的位置
+				var disX = ev.clientX - this.offsetLeft;
+				var disY = ev.clientY - this.offsetTop;
+				//设置全局捕获~~~非标准ie解决办法
+				//全局捕获：任何事件都会被捕获到设置全局捕获的对象身上
+				if(obj.setCapture){
+					obj.setCapture()
+				}
+				document.onmousemove = function(ev){
+					var ev = ev || event;
+					//操作对象的位置=鼠标的实时位置-鼠标距离操作对象的边缘位置
+					obj.style.left = ev.clientX - disX + 'px';
+					obj.style.top = ev.clientY - disY + 'px';
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+					//释放全局捕获
+					if(obj.releaseCapture){
+						obj.releaseCapture();
+					}
+				}
+				//阻止窗口的默认拖拽事件
+				return false;
+			}
+			}
+		}
+	</script>
+</head>
+<body>
+12345646546
+	<div id="div1"></div>
+</body>
+</html>

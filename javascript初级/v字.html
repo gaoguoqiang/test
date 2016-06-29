@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{width:50px;height:50px;background: red;position: absolute;top:0;left:0;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oBtn = document.getElementsByTagName("input");
+			var oDiv = document.getElementsByTagName("div");
+			oBtn[0].onclick = function(){
+				for(var i=0;i<9;i++){
+					document.body.innerHTML += '<div></div>';
+					oDiv[i].style.left = 20 + i*50 +'px';
+					if(i<5){
+						oDiv[i].style.top = 50 + i*50 +'px';
+					}else{
+						oDiv[i].style.top = 50 + (9-1-i)*50 +'px';
+					}
+				}
+				
+				
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value="点击生成v字型">
+</body>
+</html>

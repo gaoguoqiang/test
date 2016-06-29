@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin:0;}
+		li{list-style: none;}
+		body{background: #333;}
+		#center{width:940px;position: relative;margin:0 auto;top:50px;}
+		#center img{width:940px;height:529px;background: #fff;}
+		#center p,span{width:940px;line-height: 30px;text-align: center;color:white;background: #000;position: absolute;}
+		#center p{top:0;}
+		#center span{bottom:0;}
+		#center ul{position: absolute;top:0;left:950px;}
+		#center li{width:50px;height:50px;background: #000;margin-bottom: 10px;}
+		#center .active{background: yellow}
+	</style>
+	<script>
+		window.onload = function(){
+			var oImg = document.getElementsByTagName('img')[0];
+			var oP = document.getElementsByTagName('p')[0];
+			var oSpan = document.getElementsByTagName('span')[0];
+			var oUl = document.getElementsByTagName('ul')[0];
+			var oLi = oUl.getElementsByTagName('li');
+			var src = ['images/b1.jpg','images/b2.jpg','images/b3.jpg','images/b4.jpg'];
+			var text = ['图片1','图片2','图片3','图片4'];
+			var num = 0;
+
+			for(var i=0;i<src.length;i++){
+				oUl.innerHTML += '<li></li>'
+			}
+			function ooo(){
+				oImg.src = src[num];
+				oP.innerHTML = 1+num + '/' + src.length;
+				oSpan.innerHTML = text[num];
+				for(var i=0;i<oLi.length;i++){
+							oLi[i].className = '';
+						}
+				oLi[num].className = 'active';
+			};
+			ooo();
+			for(var i=0;i<oLi.length;i++){
+				oLi[i].index = i;
+				oLi[i].onclick = function(){
+					num = this.index;
+					ooo();
+				}
+			}
+
+		}
+	</script>
+</head>
+<body>
+	<div id="center">
+		<img src="">
+		<p>图片数量计算中</p>
+		<span>文字加载中</span>
+		<ul>
+		</ul>
+	</div>
+</body>
+</html>

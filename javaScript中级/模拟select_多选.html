@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul,li{padding:0;margin:0;list-style: none;}
+		#ul1{width:200px;border:1px solid orange;display: none;}
+		#ul1 li{width:100%;line-height: 30px;text-align: center;}
+		#text1{width:200px;border:1px solid orange;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oText = document.getElementById('text1');
+			var oUl = document.getElementById('ul1');
+			var aLi = oUl.getElementsByTagName('li');
+			oText.onfocus = function(){
+				oUl.style.display = 'block';
+				for(var i=0;i<aLi.length;i++){
+					aLi[i].onmouseover = function(){
+						for(var i=0;i<aLi.length;i++){
+							aLi[i].style.backgroundColor = '';
+						}
+						this.style.backgroundColor = 'orange';
+					}
+					aLi[i].onclick = function(ev){
+						var ev = ev || event;
+						if(ev.ctrlKey){
+							this.style.backgroundColor = 'orange';
+							oText.value += ','+this.innerHTML;
+							ev.cancelBubble = true;
+						}else{
+							oText.value = this.innerHTML;
+						}
+					}
+				}
+			}
+			oText.onclick = function(ev){
+				var ev = ev || event;
+				ev.cancelBubble = true
+			}
+			document.onclick = function(){
+				oUl.style.display = 'none';
+			}
+			function dx(ev){
+				
+				
+				
+
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="text1">
+	<ul id="ul1">
+		<li>黑体</li>
+		<li>宋体</li>
+		<li>微软雅黑</li>
+		<li>方正简宋</li>
+	</ul>
+</body>
+</html>

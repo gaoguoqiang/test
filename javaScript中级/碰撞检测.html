@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>碰撞检测</title>
+	<style>
+		#div1{width:100px;height: 100px;background-color: red;position:absolute;}
+		#div2{width:100px;height: 100px;background-color: blue;position: absolute;top:400px;left:800px;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oDiv1 = document.getElementById('div1');
+			var oDiv2 = document.getElementById('div2');
+			drag(oDiv1);
+			function drag(obj){
+
+				obj.onmousedown = function(ev){
+					var ev = ev || event;
+					//鼠标的实时位置-操作对象距离窗口的位置
+					var disX = ev.clientX - this.offsetLeft;
+					var disY = ev.clientY - this.offsetTop;
+					//设置全局捕获~~~非标准ie解决办法
+					//全局捕获：任何事件都会被捕获到设置全局捕获的对象身上
+					if(obj.setCapture){
+						obj.setCapture()
+					}
+					document.onmousemove = function(ev){
+						var ev = ev || event;
+						//操作对象的位置=鼠标的实时位置-鼠标距离操作对象的边缘位置
+						var L1 = ev.clientX - disX;
+						var R1 = L1 + obj.offsetWidth;
+						var T1 = ev.clientY - disY;
+						var B1 = T1 + obj.offsetHeight;
+
+						var L2 = oDiv2.offsetLeft;
+						//alert(L2)
+						var R2 = oDiv2.offsetLeft + oDiv2.offsetWidth;
+						var T2 = oDiv2.offsetTop;
+						var B2 = oDiv2.offsetTop + oDiv2.offsetHeight;
+						if(R1<L2 || L1>R2 || B1<T2 || T1>B2){
+							//alert(L2)
+							oDiv2.style.backgroundColor = 'orange';
+						}else{
+							// alert(R1)
+							// alert(L2)
+							oDiv2.style.backgroundColor = 'yellow';
+						}
+						obj.style.left = L1 + 'px';
+						obj.style.top = T1 + 'px';
+					}
+					document.onmouseup = function(){
+						document.onmousemove = null;
+						//释放全局捕获
+						if(obj.releaseCapture){
+							obj.releaseCapture();
+						}
+					}
+					//阻止窗口的默认拖拽事件
+					return false;
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+</body>
+</html>

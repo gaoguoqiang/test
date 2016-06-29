@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#div1{width:100px;height:100px;background: red;position: absolute;top:50px;left:0;}
+		#div2{width:1px;height:500px;background: black;position: absolute;top:0;left:600px;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oBtn = document.getElementById('btn');
+			var oDiv = document.getElementById('div1');
+			var op = document.getElementById('p');
+			
+			var timer = null;
+
+			oBtn.onclick = function(){
+				sprMove(oDiv,600)
+			}
+		}
+		function sprMove(obj,target){
+			var speed = 0;
+			var left = 0;
+			obj.timer = setInterval(function(){
+					/*
+					if(oDiv.offsetLeft<target){
+						speed+=(target-oDiv.offsetLeft)/5;
+					}else{
+						speed-=(oDiv.offsetLeft-target)/5;
+					}
+					 */
+					speed+=(target-obj.offsetLeft)/5;
+					speed*=0.7;
+					//用变量来存储left值，因为速度是小数，而left值不能为小数
+					left+=speed;
+					//当速度和位置同时<1时，停止定时器
+					//速度有正有负，所以取绝对值
+					if(Math.abs(speed)<1 && Math.abs(left-target)<1){
+						clearInterval(obj.timer)
+						obj.style.left = 600+'px';
+					}else{
+						obj.style.left = left+'px';
+					}
+				},30)
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value="开始" id="btn">
+	<div id="div1"></div>
+	<div id="div2"></div>
+</body>
+</html>

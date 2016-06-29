@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0;padding: 0;}
+		#box{width:1000px;margin:20px auto;}
+		#top{margin:0 auto;width:200px;margin-bottom:20px;}
+		#img{position: relative;overflow: hidden;}
+		#imgs{display: block;margin:0 auto;border:5px solid gray;width:940px;height:529px;}
+		#text1,#text2{display: block; width:940px; line-height: 30px; background: black; filter:alpha(opacity=50); opacity: 0.5;text-align: center;color:white;position: absolute;}
+		#text1{left:30px;top:5px;}
+		#text2{left:30px;bottom:5px;}
+		#left,#right{width:50px;height:50px;border:2px solid white;background: black;filter: alpha(opacity=50);opacity: 0.5;font-weight:bold;font-size: 34px;position: absolute;color: white;text-align: center;line-height: 50px;}
+		#left{left:30px;top:50%;margin-top: -27px;}
+		#right{right:30px;top:50%;margin-top: -27px;}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div id="top">
+			<div id="btn">
+				<input id="btn1" type="button" value="循环切换">
+				<input id="btn2" type="button" value="顺序切换">
+			</div>
+		</div>
+		<div id="img">
+			<img id="imgs">
+			<p id="text1">图片数量计算中......</p>
+			<p id="text2">文字加载中......</p>
+			<div id="left"><</div>
+			<div id="right">></div>
+		</div>
+	</div>
+	<script>
+		var oBtn1 = document.getElementById('btn1');
+		var oBtn2 = document.getElementById('btn2');
+		var oImg = document.getElementById('imgs');
+		var oText1 = document.getElementById('text1');
+		var oText2 = document.getElementById('text2');
+		var oLeft = document.getElementById('left');
+		var oRight = document.getElementById('right');
+		
+		var Url = ['images/b1.jpg','images/b2.jpg','images/b3.jpg','images/b4.jpg'];
+		var textImg = ['第一张','第二张','第三张','第四张'];
+		var numl = 0;
+
+		function tab(){
+			oText1.innerHTML = numl+1 + '/' + Url.length;
+			oImg.src = Url[numl];
+			oText2.innerHTML = textImg[numl];
+		}
+		tab();
+		oBtn1.onclick = function(){
+			oRight.onclick = function(){
+				numl ++;
+				if(numl == Url.length){
+					numl = 0;
+				}
+				tab();
+			}
+			oLeft.onclick = function(){
+				numl --;
+				if(numl == -1){
+					numl = 3;
+				}
+				tab();
+			}
+		}
+		oBtn2.onclick = function(){
+			oRight.onclick = function(){
+				numl ++;
+				if(numl == Url.length){
+					numl = 3;
+				}
+				tab();
+			}
+			oLeft.onclick = function(){
+				numl --;
+				if(numl == -1){
+					numl = 0;
+				}
+				tab();
+			}
+		}
+	</script>
+</body>
+</html>

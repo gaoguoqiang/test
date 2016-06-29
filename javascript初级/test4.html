@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{width:500px;height:500px;border:solid 1px gray;background: #f1f1f1;}
+	</style>
+</head>
+<body>
+	<div id="div1"></div>
+	<span id="span1">我说：</span>
+	<input id="btn1" type="text">
+	<input id="btn2" type="button" value="发送">
+	<script>
+		var oBtn1 = document.getElementById('btn1')
+		var oBtn2 = document.getElementById('btn2')
+		var oDiv3 = document.getElementById('div1')
+		var ospan1 = document.getElementById('span1')
+
+		oBtn2.onclick = function(){
+			oDiv3.innerHTML += ospan1.innerHTML + oBtn1.value + '<br>';
+			oBtn1.value = "";
+		}
+	</script>
+</body>
+</html>

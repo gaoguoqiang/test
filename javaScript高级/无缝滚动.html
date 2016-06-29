@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{margin:0;padding: 0;}
+		li{list-style:none;}
+		#box{width:1680px;height:340px;border:5px solid green;position: relative;margin:20px auto;overflow: hidden;}
+		#ul1{position: absolute;left:0;}
+		#ul1 li{float:left;padding: 10px;}
+	</style>
+	<script src="ggq.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oUl = document.getElementById('ul1');
+			var aLi = oUl.getElementsByTagName('li');
+			oUl.innerHTML += oUl.innerHTML;
+			oUl.style.width = aLi.length*aLi[0].offsetWidth+'px';
+			setInterval(function(){
+				if(oUl.offsetLeft < -oUl.offsetWidth/2){
+					oUl.style.left=0;
+				}else if(oUl.offsetLeft>=0){
+					oUl.style.left = (-oUl.offsetWidth/2)+'px';
+				}
+				oUl.style.left = oUl.offsetLeft+10+'px';
+			},30)
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ul id="ul1">
+			<li>
+				<img src="images/01.jpg">
+			</li>
+			<li>
+				<img src="images/02.jpg">
+			</li>
+			<li>
+				<img src="images/03.jpg">
+			</li>
+			<li>
+				<img src="images/04.jpg">
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

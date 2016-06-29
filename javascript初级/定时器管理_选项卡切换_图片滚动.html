@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		a{color:black;text-decoration: none;display: block;}
+		li{list-style: none;}
+		#center{width:1000px;height:500px;margin:300px auto;position: relative;border:5px solid black;overflow: hidden;}
+		#center a{float:left;width:100px;height:50px;line-height: 50px;text-align: center;font-size: 30px;background: blue;margin-left: 20px;}
+		#imgs{width:2000px;height:350px;position: absolute;top:50%;left:0;margin-top: -175px;}
+		#imgs img{float:left;width:500px;height:350px;}
+		#center ul{position: absolute;bottom:0;left:50%;width:300px;height:50px;margin-left: -150px;}
+		#center ul li{width:50px;height:50px;background: #f1f1f1;text-align: center;line-height: 50px;color:black;font-size: 40px;}
+		.li1{float:left;}
+		.li2{float:right;}
+	</style>
+	<script type="text/javascript" src="ggq.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oDiv = document.getElementById('center');
+			var aBtn = oDiv.getElementsByTagName('a');
+			var oImg = document.getElementById('imgs');
+			var aImg = oImg.getElementsByTagName('img');
+			var aLr = oDiv.getElementsByTagName('li');
+			var aUrl1 = ['images/b1.jpg','images/b2.jpg','images/b3.jpg','images/b4.jpg'];
+			var aUrl2 = ['images/01.jpg','images/02.jpg','images/03.jpg','images/04.jpg'];
+			var n = 0;
+			var timer = null;
+			aBtn[0].onclick = function(){
+				fn1(aUrl1);
+				for(var i=0;i<aBtn.length;i++){
+					aBtn[i].style.background = 'blue';
+				}
+				this.style.background = 'green';
+			} 
+			aBtn[1].onclick = function(){
+				fn1(aUrl2);
+				for(var i=0;i<aBtn.length;i++){
+					aBtn[i].style.background = 'blue';
+				}
+				this.style.background = 'green';
+			}
+			aLr[0].onclick = function(){
+				clearInterval(timer);
+				timer = setInterval(function(){
+					doMove(oImg,'left',30,-1000)
+				},1000)
+			}
+			aLr[1].onclick = function(){
+				clearInterval(timer);
+				timer = setInterval(function(){
+					doMove(oImg,'left',30,0)
+				},1000)
+			}
+			function fn1(obj){
+				for(var i=0;i<aImg.length;i++){
+					aImg[i].src = obj[i];
+				}
+
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="center">
+		<a>图片1</a>
+		<a>图片2</a>
+		<div id="imgs">
+			<img src="images/b1.jpg">
+			<img src="images/b2.jpg">
+			<img src="images/b3.jpg">
+			<img src="images/b4.jpg">
+		</div>
+		<ul>
+			<li class="li1"><</li>
+			<li class="li2">></li>
+		</ul>
+	</div>
+</body>
+</html>

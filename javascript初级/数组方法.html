@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组方法</title>
+	<style>
+		#box{width:1000px;border:5px solid red;}
+	</style>
+	<script>
+	window.onload = function(){
+		var x=0;
+		var y=1000;
+		var arr = [];
+		var timer = null;
+		var oP = document.getElementById('box');
+		timer = setInterval(function(){
+			//找到0~1000的随机整数，并添加到数组里
+			//删除所有重复的数字
+			//当数组的长度等于500时，停止定时器
+			//把数组转换为字符串，添加到p里
+			arr.push (Math.round(Math.random()*(y-x)+x));
+			for(var i=0;i<arr.length;i++){
+				for(var j=i+1;j<arr.length;j++){
+					if(arr[i]==arr[j]){
+						arr.splice(j,1);
+						j--;
+					}
+				}
+			}
+			if(arr.length == 500){
+				clearInterval(timer);
+				oP.innerHTML = arr.join(' ');
+				alert(arr.length)
+			}
+		},1) 
+
+	}
+		
+		
+
+	</script>
+</head>
+<body>
+	<p id="box">123</p>
+</body>
+</html>

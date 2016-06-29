@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		window.onload = function(){
+			var n = "";
+			for(var i=1;i<201;i++){
+				n += '<input type="button" value="按钮">'
+				if(i%10==0){// 1-9的数%10等于它本身，10%10等于0，11-19的数%10等于本身，20%10等于0，以此类推。所以i从1开始
+					n += '<br>'
+				}
+			}
+			document.body.innerHTML = n;
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

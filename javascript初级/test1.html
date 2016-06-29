@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{padding: 0;margin:0;}
+		li{list-style: none;}
+		a{color:red;text-decoration: none;display: block; background: #f1f1f1; border: 1px gray solid; text-align: center; line-height: 30px;}
+		.lis{width:100px;position: relative;}
+		ul ul{width:140px;border: 1px solid #333;text-align: center;line-height: 30px;background: yellow;display: none;}
+
+	</style>	
+	<script>
+	window.onload = haha;
+	function haha(){
+		var li = document.getElementById("lis")
+		var ul = document.getElementById("ul1")
+		var a = document.getElementById("link")
+		li.onmouseover = function (){
+			ul.style.display = 'block';
+			a.style.background = 'yellow';
+		};
+		li.onmouseout = function (){
+			ul.style.display = 'none';
+			a.style.background = '#f1f1f1';
+		};		
+	}
+	</script>
+</head>
+<body>
+	<ul>
+		<li id="lis" class="lis">
+			<a id="link" href="">微博</a>
+			<ul id="ul1">
+				<li>私信</li>
+				<li>评论</li>
+				<li>@我</li>
+			</ul>
+		</li>
+	</ul>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#div1{width:30px;height:400px;background-color: #f1f1f1;position:absolute;top:10px;left:10px;}
+		#div2{width:28px;background-color: gray;position: absolute;top:0;left:1px;}
+		#div3{width:500px;height:400px;border:1px solid red;position: absolute;top:10px;left:50px;overflow: hidden;}
+		#div4{position: absolute;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oDiv1 = document.getElementById('div1');
+			var oDiv2 = document.getElementById('div2');
+			var oDiv3 = document.getElementById('div3');
+			var oDiv4 = document.getElementById('div4');
+			
+			var T1 = oDiv3.clientHeight-oDiv4.offsetHeight;
+			//alert(T1)
+			var oDiv2Height = oDiv1.clientHeight-(-T1);
+			//alert(oDiv2Height)
+			if(oDiv2Height<=28){
+				oDiv2.style.height = '28px';
+			}else if(oDiv2Height<oDiv1.clientHeight){
+				oDiv2.style.height = oDiv2Height+'px';
+			}else{
+				oDiv2.style.height = oDiv1.clientHeight+'px';
+			}
+			// if(T1>=0){
+			// 	oDiv2.style.height = oDiv1.clientHeight+'px';
+			// }else{
+			// 	if(oDiv2.offsetHeight<28){
+			// 		oDiv2.style.height = '28px';
+			// 	}
+			// }
+			oDiv2.onmousedown = function(ev){
+				var ev = ev || event;
+				var disY = ev.clientY;
+				var disT = this.offsetTop;
+
+				document.onmousemove = function(ev){
+					var ev = ev || event;
+					var T = disT + (ev.clientY - disY);
+					
+					if(T<0){
+						T = 0;
+					}else if(T>oDiv1.offsetHeight-oDiv2.offsetHeight){
+						T = oDiv1.offsetHeight-oDiv2.offsetHeight;
+					}
+					var bili = T/(oDiv1.offsetHeight-oDiv2.offsetHeight);
+					oDiv2.style.top = T + 'px';
+					oDiv4.style.top = T1*bili+'px';
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+				}
+				return false;
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="div1">
+		<div id="div2"></div>
+	</div>
+	<div id="div3">
+		<div id="div4">
+
+    国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百
+百度
+国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百国内国际军事图片社会娱乐科技体育财经汽车	
+    主页 社区 官网
+
+火狐中文网
+
+百
+市惠济区老鸦陈街道薛岗村，村民范华培持刀行凶，致三死一伤，死者包括街道拆迁办副主任。郑州警方发布通告称，制止行凶过程中，民警鸣枪警告无效，开枪将其击毙。
+新京报讯 5月10日下午，拆迁中的郑州市惠济区老鸦陈街道薛岗村告称，制止行凶过程中，民警鸣枪警告无效，开枪将其击毙。
+新京报讯 5月10日下午，拆迁中的郑州市惠济区老鸦陈街道薛岗村，村民范华培持刀行凶，致三死一伤，死者包括街道拆迁办副主任。郑州警方发布通告称，制止行凶过程中，民警鸣枪警告无效，开枪将其击毙。
+新京报讯 5月10日下午，拆迁中的郑州市惠济区老鸦陈街道薛岗村告称，制止行凶过程中，民警鸣枪警告无效，开枪将其击毙。
+新京报讯 5月10日下午，拆迁中的郑州市惠济区老鸦陈街道薛岗村，村民范华培持刀行凶，致三死一伤，死者包括街道拆迁办副主任。郑州警方发布通告称，制止行凶过程中，民警鸣枪警告无效，开枪将其击毙。
+新京报讯 5月10日下午，拆迁中的郑州市惠济区老鸦陈街道薛岗村
+
+
+</div>
+	</div>
+</body>
+</html>

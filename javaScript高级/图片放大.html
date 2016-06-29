@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{margin:0;padding:0;list-style:none;}
+		#ul1{width:366px;position: relative;margin:50px auto;}
+		#ul1 li{width:100px;height:100px;background: red;margin:10px;float:left;border:1px solid #666;display: inline;}
+	</style>
+	<script type="text/javascript" src="ggq.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oUl = document.getElementById('ul1');
+			var aLi = oUl.getElementsByTagName('li');
+			var minIndex = 1;
+			//先设置left和top并不会影响当前的布局
+			//但是要注意此时的left和top值包括了元素的margin值
+			//接下来设置绝对定位的时候要注意取消原来的margin值
+			for(var i=0;i<aLi.length;i++){
+				aLi[i].style.left = aLi[i].offsetLeft + 'px';
+				aLi[i].style.top = aLi[i].offsetTop + 'px';
+			}
+			for(var i=0;i<aLi.length;i++){
+				aLi[i].style.position = 'absolute';
+				aLi[i].style.margin = '0';
+				aLi[i].onmouseover = function(){
+					//宽高变化的同时，让marginzi也同时发生变化，就会产生从中间向四周变大
+					startMove(this,{width:150,height:150,marginLeft:-25,marginTop:-25});
+					this.style.zIndex = minIndex++;
+				}
+				aLi[i].onmouseout = function(){
+					startMove(this,{width:100,height:100,marginLeft:0,marginTop:0});
+				}
+			}
+
+		}
+	</script>
+</head>
+<body>
+	<ul id="ul1">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin:0;}
+		#center{width:1360px;margin:50px auto;}
+		#center input{margin-left: 50px;margin-bottom:50px;}
+		#main{width:1360px;height:600px;position: relative;}
+		#left{width:940px;height:600px;position: absolute;top:0;left:0;}
+		#right{width:400px;height:600px;position: absolute;top:0;right:0;}
+		#left span,#left p{width:940px;line-height: 30px;color:black;position: absolute;}
+		#left span{text-align: center;top:529px;left:0;}
+		#left p{text-indent: 30px;top:559px;left:0;}\
+		#left img{width:940px;height:529px;background: yellow;display: block;}
+		#right span,#right p{width:400px;line-height: 30px;color:black;position: absolute;}
+		#right span{text-align: center;top:320px;left:0;}
+		#right p{text-indent: 30px;top:350px;left:0;}\
+		
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var abtn = document.getElementsByTagName('input');
+			var aimg = document.getElementsByTagName('img');
+			var aspan = document.getElementsByTagName('span');
+			var ap = document.getElementsByTagName('p');
+			var aurl1 = ['images/b1.jpg','images/b2.jpg','images/b3.jpg','images/b4.jpg'];
+			var aurl2 = ['images/01.jpg','images/02.jpg','images/03.jpg'];
+			var atext1 = ['图片1','图片2','图片3','图片4'];
+			var atext2 = ['图片1','图片2','图片3',];
+			var num = 0;
+			var num1 = 0;
+			//初始化
+			for(var i=0;i<aimg.length;i++){
+				if(i==0){
+					aimg[i].src = aurl1[num];
+					aspan[i].innerHTML = atext1[num];
+					ap[i].innerHTML = 1+num+'/'+aurl1.length;
+				}else{
+					aimg[i].src = aurl2[num];
+					aspan[i].innerHTML = atext2[num];
+					ap[i].innerHTML = 1+num+'/'+aurl2.length;
+				}
+			}
+			//点击图片切换
+			aimg[0].onclick = function(){
+				num++;
+				if(num==aurl1.length){
+					num=0
+				}
+				aimg[0].src = aurl1[num];
+					aspan[0].innerHTML = atext1[num];
+					ap[0].innerHTML = 1+num+'/'+aurl1.length;
+			}
+			aimg[1].onclick = function(){
+				num++;
+				if(num==aurl2.length){
+					num=0
+				}
+				aimg[1].src = aurl2[num];
+					aspan[1].innerHTML = atext2[num];
+					ap[1].innerHTML = 1+num+'/'+aurl2.length;
+			}
+			//点击按钮图片切换
+			abtn[0].onclick = function(){
+				num--;
+				num1--;
+				if(num==-1){
+					num=aurl1.length-1;
+				}
+				aimg[0].src = aurl1[num];
+				aspan[0].innerHTML = atext1[num];
+				ap[0].innerHTML = 1+num+'/'+aurl1.length;
+				if(num1==-1){
+					num1=aurl2.length-1;
+				}
+				aimg[1].src = aurl2[num1];
+					aspan[1].innerHTML = atext2[num1];
+					ap[1].innerHTML = 1+num1+'/'+aurl2.length;
+			}
+			abtn[1].onclick = function(){
+				num++;
+				num1++;
+				if(num==aurl1.length){
+					num=0;
+				}
+				aimg[0].src = aurl1[num];
+				aspan[0].innerHTML = atext1[num];
+				ap[0].innerHTML = 1+num+'/'+aurl1.length;
+				if(num1==aurl2.length){
+					num1=0;
+				}
+				aimg[1].src = aurl2[num1];
+					aspan[1].innerHTML = atext2[num1];
+					ap[1].innerHTML = 1+num1+'/'+aurl2.length;
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="center">
+		<input type="button" value="上一组">
+		<input type="button" value="下一组">
+		<div id="main">
+			<div id="left">
+				<img src="">
+				<span>文字加载中</span>
+				<p>图片数量计算中</p>
+			</div>
+			<div id="right">
+				<img src="">
+				<span>文字加载中</span>
+				<p>图片数量计算中</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

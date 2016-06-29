@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin:0;}
+		li{list-style: none;}
+		#center{margin:50px auto;width:750px;height:452px;border:1px solid #333;position: relative;}
+		#center img{width:699px;height:400px;position: absolute;right:0;}
+		#list h3{width:50px;height:112px;background: blue;border-bottom: 1px solid white;text-align: center;line-height: 112px;color:white;}
+		#list li .active{background: green;color:red;}
+		#list li ul{position: absolute;bottom:0;left:50px;width:700px;}
+		#list li ul li{float:left;text-align: center;line-height:50px;border-right: 1px solid white;background: gray;color:green;width:33%;}
+		#list li ul li:last-child{border-right: none;}
+		
+	</style>
+</head>
+<body>
+	<div id="center">
+		<img src="images/b1.jpg">
+		<ul id="list">
+			<li>
+				<h3 class="active">一</h3>
+				<ul>
+					<li>56</li>
+					<li>456</li>
+					<li>34</li>
+				</ul>
+			</li>
+			<li>
+				<h3>二</h3>
+				<ul></ul>
+			</li>
+			<li>
+				<h3>三</h3>
+				<ul></ul>
+			</li>
+			<li>
+				<h3>四</h3>
+				<ul></ul>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

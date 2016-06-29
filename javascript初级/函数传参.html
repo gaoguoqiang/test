@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+	window.onload = function(){
+		var oUl = document.getElementById('list');
+		var aLi = oUl.getElementsByTagName('li');
+		var oP = document.getElementsByTagName('p')[0];
+		var num = 0;
+		var money = 0;
+		var maxPri = 0;
+		for(var i=0;i<aLi.length;i++){
+			fn1(aLi[i]);
+
+		}
+		function fn1(oLi){
+			var oBtn = oLi.getElementsByTagName('input');
+			var oStrong = oLi.getElementsByTagName('strong')[0];
+			var oEm = oLi.getElementsByTagName('em')[0];
+			var oSpan = oLi.getElementsByTagName('span')[0];
+			var n1 = Number(oStrong.innerHTML);
+			var n2 = parseFloat(oEm.innerHTML);
+			oBtn[1].onclick = function(){
+				n1++;
+				num++;
+				money +=n2;
+				if(n2>maxPri){
+					maxPri=n2;
+				}
+				oStrong.innerHTML = n1;
+				oSpan.innerHTML = n1*n2;
+				oP.innerHTML = '商品一共：'+num+'件，一共：'+money+'元<br>最贵的是：'+maxPri+'元';
+			}
+			oBtn[0].onclick = function(){
+				
+				if(n1>0){
+					n1--;
+					num--;
+					money-=n2;
+				}//加else会导致数量为0时单价不会变，必须再点一下
+				if(n1==0){
+					maxPri=0;
+				}
+				
+				oStrong.innerHTML = n1;
+				oSpan.innerHTML = n1*n2;
+				fn2();
+				oP.innerHTML = '商品一共：'+num+'件，一共：'+money+'元<br>最贵的是：'+maxPri+'元';
+			}
+
+			function fn2(){
+				for(var i=0;i<aLi.length;i++){
+					if(aLi[i].getElementsByTagName('strong')[0].innerHTML>0){
+						if(parseFloat(aLi[i].getElementsByTagName('em')[0].innerHTML)>maxPri){
+							maxPri=parseFloat(aLi[i].getElementsByTagName('em')[0].innerHTML);
+						}
+					}
+				}
+			}
+			
+
+		}
+	}
+	</script>
+</head>
+<body>
+	<ul id="list">
+		<li>
+			<input type="button" value="-">
+			<strong>0</strong>
+			<input type="button" value="+">
+			单价；<em>25.5元</em>
+			小计；<span>0元</span>
+		</li>
+		<li>
+			<input type="button" value="-">
+			<strong>0</strong>
+			<input type="button" value="+">
+			单价；<em>50元</em>
+			小计；<span>0元</span>
+		</li>
+		<li>
+			<input type="button" value="-">
+			<strong>0</strong>
+			<input type="button" value="+">
+			单价；<em>63.5元</em>
+			小计；<span>0元</span>
+		</li>
+		<li>
+			<input type="button" value="-">
+			<strong>0</strong>
+			<input type="button" value="+">
+			单价；<em>15.5元</em>
+			小计；<span>0元</span>
+		</li>
+		<li>
+			<input type="button" value="-">
+			<strong>0</strong>
+			<input type="button" value="+">
+			单价；<em>103.5元</em>
+			小计；<span>0元</span>
+		</li>
+	</ul>
+	<p>商品一共：0件，一共：0元<br>
+		最贵的是：0元
+	</p>
+</body>
+</html>

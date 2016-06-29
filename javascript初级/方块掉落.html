@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="ggq.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var str = '';
+			var len = 20;
+			var timer = null;
+
+			var num = 0;
+			var onOff = true;
+			var aDiv = document.getElementsByTagName('div');
+			for(var i=0;i<len;i++){
+				str += '<div style = "width:50px;height:50px;background:red;position:absolute;top:0px;left:'+i*60+'px;"></div>'
+			}
+			document.body.innerHTML = str;
+			document.onclick = function(){
+				if(onOff&&parseInt(getStyle(aDiv[len-1],'top'))===0){
+					clearInterval(timer);
+					timer = setInterval(function(){
+						doMove(aDiv[num],'top',50,500);
+						num++;
+						if(num===len){
+							clearInterval(timer);
+							num=0;
+							onOff = false;
+						}
+					},100);
+				}else if(!onOff&&parseInt(getStyle(aDiv[len-1],'top'))===500){
+					clearInterval(timer);
+					timer = setInterval(function(){
+						doMove(aDiv[num],'top',50,0);
+						num++;
+						if(num===len){
+							clearInterval(timer);
+							num=0;
+							onOff = true;
+						}
+					},100)
+				}
+			}
+		}
+	</script>
+</head>
+
+<body>
+	
+</body>
+</html>

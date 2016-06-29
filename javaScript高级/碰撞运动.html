@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#div1{width:100px;height:100px;background: red;position: absolute;top:0;left:0;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oDiv = document.getElementById('div1');
+			var speedX = 12;
+			var speedY = 0;
+			function startMove(){
+				setInterval(function(){
+					speedY+=3;
+					var l = oDiv.offsetLeft+speedX;
+					var t = oDiv.offsetTop+speedY;
+					if(l >= document.documentElement.clientWidth-oDiv.offsetWidth){
+						speedX*=-0.8;
+						l = document.documentElement.clientWidth-oDiv.offsetWidth;
+					}else if(l<=0){
+						speedX*=-0.8;
+						l = 0;
+					}
+					if(t >= document.documentElement.clientHeight-oDiv.offsetHeight){
+						speedY*=-0.8;
+						speedX*=0.8
+						t = document.documentElement.clientHeight-oDiv.offsetHeight;
+					}else if(t <= 0){
+						speedY*=-1;
+						t = 0;
+					}
+					if(Math.abs(speedX)<1){
+						speedX = 0;
+					}
+					if(Math.abs(speedY)<1){
+						speedY = 0;
+					}
+					oDiv.style.left = l+'px';
+					oDiv.style.top = t+'px';
+				},30)
+			}
+			startMove();
+		}
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标滚轮</title>
+	<style>
+		#div1{width:100px;height:100px;background-color: red;position: absolute;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oDiv = document.getElementById('div1');
+			/*
+			ie/chrome: onmousewheel
+
+			ff: DOMMouseScroll必须用addEventListener
+			 */
+			oDiv.onmousewheel = fn;
+			if(oDiv.addEventListener){
+				oDiv.addEventListener('DOMMouseScroll',fn,false);
+			}
+			
+			function fn(){
+				alert(1)
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>

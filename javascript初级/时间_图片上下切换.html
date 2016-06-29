@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin:0;}
+		li{list-style: none;}
+		#center{width:1000px;margin:200px auto;}
+		#center li{float:left;position: relative;width:122px;height:172px;overflow: hidden;}
+		#center li div{width:122px;height:344px;position: absolute;top:0;}
+		.sep{background: url(images/10.jpg);}
+	</style>
+	<script type="text/javascript" src="ggq.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var aDiv = document.getElementsByTagName('div');
+			var aSep = document.getElementsByClassName('sep');
+			var aImg = document.getElementsByTagName('img');
+			var n=0;
+			var onOff=true;
+			function fnTime(){
+				var myTime = new Date();
+				var myHours = myTime.getHours();//时
+				var myMin = myTime.getMinutes();//分
+				var mySec = myTime.getSeconds();//秒
+				var str = fn2(myHours)+fn2(myMin)+fn2(mySec);
+				//获取旧的时间，用来控制图片和做判断
+				var str2 = fn2(myHours)+fn2(myMin)+fn2(mySec-1);
+				for(var j=0;j<aImg.length;j++){
+					if(j%2===0){
+						aImg[j].src = 'images/'+str2.charAt(n)+'.jpg';
+						
+					}else{
+						aImg[j].src = 'images/'+str.charAt(n)+'.jpg';
+						n++;//n++只能放在这里，只有第二张图片加载完n才加1
+					}
+					if(n===str.length){
+						n=0;
+					}
+				}
+				//旧的时间和新的时间进行判断，只有不相等的时候才移动div
+				for(var k=0;k<str.length;k++){
+					if(str.charAt(k)!=str2.charAt(k)){
+							doMove(aDiv[k],'top',20,-172);
+							aDiv[k].style.top = 0;
+					}
+				}
+			}
+			//控制分隔符号闪动
+			setInterval(function(){
+				if(onOff){
+					for(var j=0;j<aSep.length;j++){
+						aSep[j].style.backgroundImage = 'url(images/10.jpg)';
+					}
+					onOff=false;
+				}else{
+					for(var j=0;j<aSep.length;j++){
+						aSep[j].style.background = 'url(images/11.jpg)';
+					}
+					onOff=true;
+				}
+			},500)
+			setInterval(fnTime,1000);
+			fnTime();
+			function fn2(n){
+				return n<10?'0'+n:''+n;
+			}
+		}
+	</script>
+</head>
+<body>
+	<p></p>
+	<ul id="center">
+		<li>
+			<div>
+				<img src="images/0.jpg">
+				<img src="images/0.jpg">
+			</div>
+		</li>
+		<li>
+			<div>
+				<img src="images/0.jpg">
+				<img src="images/0.jpg">
+			</div>
+		</li>
+		<li class="sep">
+			
+		</li>
+		<li>
+			<div>
+				<img src="images/0.jpg">
+				<img src="images/0.jpg">
+			</div>
+		</li>
+		<li>
+			<div>
+				<img src="images/0.jpg">
+				<img src="images/0.jpg">
+			</div>
+		</li>
+		<li class="sep">
+			
+		</li>
+		<li>
+			<div>
+				<img src="images/0.jpg">
+				<img src="images/0.jpg">
+			</div>
+		</li>
+		<li><div>
+				<img src="images/0.jpg">
+				<img src="images/0.jpg">
+			</div>
+		</li>
+	</ul>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin:0;}
+		li{list-style: none;}
+		#list{width:300px;border:1px solid #333;margin:20px auto;position: relative;}
+		#list li{position: relative;}
+		#list li h3{width:98px; line-height:30px;text-align:center;border:1px solid blue;float:left;}
+		#list li ul li{width:300px;line-height: 28px;text-align: center;background:#20acff;border-bottom:1px solid white; }
+		#list .active h3{background: green;}
+		#list .active ul .hover{line-height: 40px;background: white;}
+		#list ul{position:absolute;top:32px; display: none;}
+		#list .active ul{display: block;}
+
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var aLi = document.getElementsByClassName('li');
+			var oLi = null;
+			for(var i=0;i<aLi.length;i++){
+				fn2(aLi[i]);
+				oLi = aLi[i].getElementsByTagName('li');
+				for(var j=0;j<oLi.length;j++){
+					fn1(oLi[j]);
+				}
+			}
+
+			function fn1(oli){
+				oli.onmouseover = function(){
+					
+					this.className = 'hover';
+				}
+				oli.onmouseout = function(){
+					this.className = '';
+				}
+				
+			}
+			function fn2(orli){
+				var oBtn = orli.getElementsByTagName('h3')[0];
+				oBtn.onclick = function(){
+					for(var i=0;i<aLi.length;i++){
+						aLi[i].className = 'li';
+					}
+					orli.className += ' active';
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul id="list">
+		<li class="li active">
+			<h3>1</h3>
+			<ul>
+				<li>123456789</li>
+				<li>123456789</li>
+				<li>123456789</li>
+				<li>123456789</li>
+				<li>123456789</li>
+				<li>123456789</li>
+				<li>123456789</li>
+				<li>123456789</li>
+				<li>123456789</li>
+			</ul>
+		</li>
+		<li class="li">
+			<h3>2</h3>
+			<ul>
+				<li>kfjfkfmfkfj</li>
+				<li>kfjfkfmfkfj</li>
+				<li>kfjfkfmfkfj</li>
+				<li>kfjfkfmfkfj</li>
+				<li>kfjfkfmfkfj</li>
+				<li>kfjfkfmfkfj</li>
+				<li>kfjfkfmfkfj</li>
+				<li>kfjfkfmfkfj</li>
+				<li>kfjfkfmfkfj</li>
+			</ul>
+		</li>
+		<li class="li">
+			<h3>3</h3>
+			<ul>
+				<li>坑距坑啊揭开双方</li>
+				<li>坑距坑啊揭开双方</li>
+				<li>坑距坑啊揭开双方</li>
+				<li>坑距坑啊揭开双方</li>
+				<li>坑距坑啊揭开双方</li>
+				<li>坑距坑啊揭开双方</li>
+				<li>坑距坑啊揭开双方</li>
+				<li>坑距坑啊揭开双方</li>
+				<li>坑距坑啊揭开双方</li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>

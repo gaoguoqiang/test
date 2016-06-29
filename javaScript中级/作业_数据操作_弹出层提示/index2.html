@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Untitled Document</title>
+<link href="css.css" rel="stylesheet" type="text/css" />
+<script src="data.js"></script>
+<script>
+	window.onload = function(){
+		var oDiv1 = document.getElementById('container');
+		var oUl = document.getElementById('header');
+		var aLi = oUl.getElementsByTagName('li');
+		var msg = document.getElementById('listContent');
+		var tip = document.getElementById('tips');
+		var arrow = document.getElementById('arrow');
+		var tipsContent = document.getElementById('tipsContent');
+		lists(0);
+		for(var i=0;i<data.length;i++){
+			var oLi = document.createElement('li');
+			oLi.innerHTML=data[i].name;
+			oUl.appendChild(oLi);
+			aLi[0].className = 'focus';
+			aLi[i].onclick = function(){
+				for(var j=0;j<aLi.length;j++){
+					aLi[j].index = j;
+					aLi[j].className = '';
+				}
+				this.className = 'focus';
+				lists(this.index)
+			}
+		}
+		function lists(n){
+			msg.innerHTML = '';
+			for(var i=0;i<data[n].list.length;i++){
+				var oUl1 = document.createElement('ul');
+				var oLi1 = document.createElement('li');
+				var oA = document.createElement('a');
+				oA.innerHTML = data[n].list[i].title;
+				oA.href = 'javascript:;';
+				oA.index = i;
+				oLi1.appendChild(oA);
+				oUl1.appendChild(oLi1);
+				oUl1.className = 'list';
+				msg.appendChild(oUl1);
+				var oLi2 = document.createElement('li');
+				oLi2.className = 'col';
+				var oLi3 = document.createElement('li');
+				oLi3.className = 'col';
+				var oLi4 = document.createElement('li');
+				oLi4.className = 'col';
+				var oLi5 = document.createElement('li');
+				oLi5.className = 'col';
+				var oLi6 = document.createElement('li');
+				oLi6.className = 'col';
+				var oLi7 = document.createElement('li');
+				oLi7.className = 'col';
+				var h4 = document.createElement('h4');
+				h4.className = 'col';
+				oA.onmouseover = function(){
+					tip.style.display = 'block';
+					//alert(this.parentNode.offsetTop)
+					tip.style.top = this.parentNode.offsetTop-tip.offsetHeight/2+'px';
+					tip.style.left = this.offsetWidth+this.parentNode.offsetLeft+10+'px';
+					arrow.style.top = tip.offsetHeight/2+'px';
+					h4.innerHTML = data[n].list[this.index].company;
+					oLi2.innerHTML = '招聘人数：'+data[n].list[this.index].recruitingNumbers;
+					oLi3.innerHTML = '工作地点：'+data[n].list[this.index].workingLocation;
+					oLi4.innerHTML = '工作经验：'+data[n].list[this.index].workExperience;
+					oLi5.innerHTML = '学历：'+data[n].list[this.index].education;
+					oLi6.innerHTML = '薪资：'+data[n].list[this.index].wage;
+					oLi7.innerHTML = '发布时间：'+data[n].list[this.index].addDate;
+					tipsContent.appendChild(h4);
+					tipsContent.appendChild(oLi2);
+					tipsContent.appendChild(oLi3);
+					tipsContent.appendChild(oLi4);
+					tipsContent.appendChild(oLi5);
+					tipsContent.appendChild(oLi6);
+					tipsContent.appendChild(oLi7);
+				}
+				oA.onmouseout = function(){
+					tip.style.display = 'none';
+					tipsContent.innerHTML = '';
+				}
+			}
+		}
+	}
+</script>
+</head>
+
+<body>
+	<div id="container">
+		<ul id="header"></ul>
+		
+		<div id="listContent"></div>
+	</div>
+	
+	<div id="tips">
+		<span id="arrow"></span>
+        <div id="tipsContent"></div>
+	</div>
+</body>
+</html>

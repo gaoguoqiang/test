@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#div1{width:100px;height:100px;background-color: red;position: absolute;top:50px;left:20px;}
+	</style>
+	<script src="ggq.js"></script>
+	<script>
+		window.onload = function(){
+			var btn = document.getElementById('btn1');
+			var oDiv = document.getElementById('div1');
+			btn.onclick = function(){
+				fn(oDiv,300)
+				//doMove(oDiv,'left',10,400)
+			}
+			function fn(obj,target){
+				
+				var timer = null;
+				clearInterval(timer)
+				timer = setInterval(function(){
+					var speed = (target-obj.offsetLeft)/20;
+					speed = Math.ceil(speed)
+					if(obj.offsetLeft >= target){
+						clearInterval(timer)
+					}else{
+						obj.style.left = obj.offsetLeft + speed + 'px';
+					}
+				},10)
+				
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value="按钮" id="btn1">
+	<div id="div1"></div>
+	<div style="width:1px;height:500px;background-color: black;position: absolute;top:10px;left:300px;"></div>
+</body>
+</html>

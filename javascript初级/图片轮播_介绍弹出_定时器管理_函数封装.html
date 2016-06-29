@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		#box{width:940px;height:529px;border:3px solid gray;margin:200px auto;position: relative;overflow: hidden;}
+		#imgs{width:3760px;height:529px;position: absolute;top:0;left:0;}
+		#imgs img{float:left;}
+		#text{width:940px;height:100px;position: absolute;bottom:-100px;left:0;background:black;color:white;filter: alpha(opacity=50);opacity: 0.5;}
+		#text h3{text-indent: 30px;margin-bottom: 20px;margin-top: 10px;}
+		#text p{text-indent: 30px;}
+	</style>
+	<script type="text/javascript" src="ggq.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oImg = document.getElementById('imgs');
+			var oText = document.getElementById('text');
+			var aImg = oImg.getElementsByTagName('img');
+			var oH3 = oText.getElementsByTagName('h3')[0];
+			var oP = oText.getElementsByTagName('p')[0];
+			var aH3 = ['图片1','图片2','图片3','图片4'];
+			var aP = ['图片1的说明','图片2的说明','图片3的说明','图片4的说明'];
+			/////////////思路最重要/////////////////////
+			/*
+			1:控制图片滚动，滚动的距离由一个数组left来控制，从0开始
+			2:每次滚动“完成”后，控制说明（oText）弹出，弹出完成后
+			  控制说明隐藏
+			方法：用一个值为0的变量控制三者的执行顺序
+				a:当值为“0”时，控制图片滚动，滚动完成后
+					值为“1”
+				b:当值为“1”时，控制说明（oText）弹出，同时改变说明的文字
+					用变量“n”来控制文字内容，弹出完成后值为“2”
+				c:当值为“2”时，控制说明（oText）隐藏，隐藏完成后值为“0”，
+					此时又可以继续执行图片滚动，循环往复;同时隐藏完成后
+					控制变量“n”的值++；用来控制图片滚动的距离，和说明文字
+					的变化，当n===数组的长度时，n=0;且重置图片距离
+
+			 */
+			var n=0;
+			var left = [0,-940,-1880,-2820]
+			var onOff = 0;
+			function fn1(){//用来控制下方提示的运动
+				setInterval(function(){
+					if(onOff===1){
+						oH3.innerHTML = aH3[n];
+						oP.innerHTML = aP[n];
+						doMove(oText,'bottom',5,0,function(){
+							onOff = 2;//当otext执行完时，开关为true
+						})
+					}
+					if(onOff===2){
+						//alert(0)
+						doMove(oText,'bottom',5,-100,function(){
+							onOff = 0;
+							n++;
+							if(n===aP.length){
+								n=0;
+								oImg.style.left = 0;
+							}
+						});
+					}
+				},1000)
+			}
+			function fn2(){//用来控制图片的滚动
+				setInterval(function(){
+					if(onOff===0){
+						doMove(oImg,'left',20,left[n],function(){
+							onOff=1;
+							fn1();
+						});
+					}
+				},1000)
+			}
+			fn2()
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<div id="imgs">
+			<img src="images/b1.jpg">
+			<img src="images/b2.jpg">
+			<img src="images/b3.jpg">
+			<img src="images/b4.jpg">
+		</div>
+		<div id="text">
+			<h3>我是标题，大标题</h3>
+			<p>我是说明，小说明，。。。。。。</p>
+		</div>
+	</div>
+</body>
+</html>

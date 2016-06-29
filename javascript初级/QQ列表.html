@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		li{list-style: none;}
+		#center{width:500px;margin:50px auto;}
+		#lies{width:500px;}
+		#lies h2{width:500px;line-height: 30px;text-indent: 20px;background: green;font-size: 20px;color:white;}
+		#lies ul li{width:500px;line-height: 25px;text-indent:24px;font-size: 18px;color:black;background: yellow;border-bottom: 1px solid #666;}
+		#lies ul{display: none;}
+		#lies ul .active{background: red;}
+		#lies .hover{background: #f1f1f1;color:black;}
+
+	</style>
+	<script>
+		window.onload = function(){
+			var oUl = document.getElementById('lies');
+			var aH2 = oUl.getElementsByTagName('h2');
+			var aUl = oUl.getElementsByTagName('ul');
+			var aLi = null;
+			var arrLi = [];
+			for(var i=0;i<aH2.length;i++){
+				aH2[i].index = i;
+				aH2[i].onclick = function(){
+					if(this.className == ''){
+						aUl[this.index].style.display = 'block';
+						this.className = 'hover';
+					}else{
+						aUl[this.index].style.display = 'none';
+						this.className = '';
+					}
+				}
+			}
+			//获取ul里的li
+			for(var i=0;i<aUl.length;i++){
+				aLi = aUl[i].getElementsByTagName('li');//获取到ul里的li(这是一个数组)
+				for(var j=0;j<aLi.length;j++){//获取到ul里的每一个li（这是单个）
+					arrLi.push(aLi[j]);//把每一个li都添加到arrli里
+				}
+			}
+			for(var i=0;i<arrLi.length;i++){
+				arrLi[i].onclick = function(){
+					for(var i=0;i<arrLi.length;i++){
+						arrLi[i].className = '';
+					}
+					this.className = 'active';
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="center">
+		<ul id="lies">
+			<li>
+				<h2>我的好友</h2>
+				<ul>
+					<li>123</li>
+					<li>123</li>
+					<li>123</li>
+				</ul>
+				<h2>我的家人</h2>
+				<ul>
+					<li>465</li>
+					<li>456</li>
+					<li>456</li>
+				</ul>
+				<h2>我的同学</h2>
+				<ul>
+					<li>789</li>
+					<li>789</li>
+					<li>789</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

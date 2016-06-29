@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		img{display: block;}
+		#box{width:940px;height:600px;margin:50px auto;overflow: hidden;position: relative;}
+		#imgs{width:940px;height:2116px;position: absolute;top:0;left:0;}
+		#box p{width:960px;line-height: 30px;text-align: center;background: black;filter: alpha(opacity=50);opacity: 0.5;color:red;position: absolute;z-index: 3;}
+		.down{bottom:0;}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var aBtn = document.getElementsByTagName('p');
+			var aImg = document.getElementById('imgs');
+			aBtn[0].onmousedown = function(){
+				doMove(aImg,'top',10,-1516)
+			}
+			aBtn[1].onmousedown = function(){
+				doMove(aImg,'top',10,0)
+			}
+			//鼠标抬起时，目标位置和，移动距离都为零，所以他就会原地不动
+			aBtn[0].onmouseup = function(){
+				doMove(aImg,'top',0,0)
+			}
+			aBtn[1].onmouseup = function(){
+				doMove(aImg,'top',0,0)
+			}
+			function doMove(obj,attr,dir,target,endFn){
+				//obj是控制的对象；attr是改变什么样式；dir是改变的速度；target是改变的目标；endFn是停止后执行的函数
+				//控制方向，如果当前位置小于目标位置是正数，反之是负数
+				dir = parseInt(getStyle(obj,attr))<target?dir:-dir;
+				clearInterval(obj.timer);//先清除定时器，以防多次点击重复开启定时器
+				//alert(parseInt(getStyle(aImg,'top')))~~去除获取到的样式的单位（px）
+				obj.timer = setInterval(function(){
+					var speed = parseInt(getStyle(obj,attr)) + dir;
+					if(speed>target&&dir>0||speed<target&&dir<0){
+						speed = target;
+					}
+					obj.style[attr] = speed + 'px';
+					if(speed==target){
+						clearInterval(obj.timer);
+						endFn&&endFn();
+					}
+				},50)
+			}
+			function getStyle(obj,attr){//获取元素样式
+				return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr]
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<p>上</p>
+		<div id="imgs">
+			<img src="images/b1.jpg">
+			<img src="images/b2.jpg">
+			<img src="images/b3.jpg">
+			<img src="images/b4.jpg">
+		</div>
+		<p class="down">下</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			function fnTime(){
+				var myTime = new Date();
+				var myYear = myTime.getFullYear();//年
+				var myMonth = myTime.getMonth()+1;//月
+				var myDate = myTime.getDate();//日
+				var myWeek = myTime.getDay();//星期几
+				var myHours = myTime.getHours();//时
+				var myMin = myTime.getMinutes();//分
+				var mySec = myTime.getSeconds();//秒
+				var str = '';
+
+				if(myWeek===0){myWeek='星期日'};
+				if(myWeek===1){myWeek='星期一'};
+				if(myWeek===2){myWeek='星期二'};
+				if(myWeek===3){myWeek='星期三'};
+				if(myWeek===4){myWeek='星期四'};
+				if(myWeek===5){myWeek='星期五'};
+				if(myWeek===6){myWeek='星期六'};
+
+				str = myYear+'年'+myMonth+'月'+myDate+'日 '+myWeek+' '+fn2(myHours)+'：'+fn2(myMin)+'：'+fn2(mySec);
+				document.body.innerHTML = str;
+			}
+			setInterval(fnTime,1000);
+			fnTime();
+			function fn2(n){
+				return n<10?'0'+n:''+n;
+			}
+			
+		}
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

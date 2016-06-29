@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		window.onload = function(){
+			var oText = document.getElementById('btn');
+			oText.onfocus = function(){
+				if(this.value=='请输入内容'){
+					this.value = '';
+				}
+			}
+			oText.onblur = function(){
+				if(this.value==''){
+					this.value = '请输入内容'
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" value="请输入内容"id="btn">
+
+</body>
+</html>

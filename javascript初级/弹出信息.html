@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0; margin:0px;}
+		ul{margin-top:200px;display: block;clear:both;padding:1px;}
+		li{list-style: none; width:100px; height:100px;float:left;position: relative;background: gray;margin-right:80px;}
+		div{width:200px; height:200px;background: red; position: absolute;top:-200px;left:20px;display: none;}
+
+	</style>
+	<script>
+		window.onload = function(){
+			var oLis = document.getElementsByTagName("li");
+			for (var i = 0; i < oLis.length; i++) {
+				oLis[i].onmouseover = function(){
+					this.getElementsByTagName("div")[0].style.display = 'block';
+				}
+				oLis[i].onmouseout = function(){
+					this.getElementsByTagName("div")[0].style.display = 'none';
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul>
+		<li>
+			<div></div>
+		</li>
+		<li>
+			<div></div>
+		</li>
+		<li>
+			<div></div>
+		</li>
+	</ul>
+	<ul>
+		<li>
+			<div></div>
+		</li>
+		<li>
+			<div></div>
+		</li>
+		<li>
+			<div></div>
+		</li>
+	</ul>
+</body>
+</html>

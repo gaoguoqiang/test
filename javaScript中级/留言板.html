@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			var aBtn = document.getElementsByTagName('input');
+			var oUl = document.getElementById('list');
+			var onOff = true;
+			var oLi = null;
+			var oA = null;
+			var aLi = {}
+			aBtn[1].onclick = function(){
+				//动态创建li和a
+				oLi = document.createElement('li');
+				oA = document.createElement('a');
+				oLi.innerHTML = aBtn[0].value;
+				oA.innerHTML = '隐藏';
+				oA.href='javascript:;';
+				//在li里添加元素a
+				oLi.appendChild(oA);
+				//ie和其他标准浏览器对于children的获取内容不一样
+				if(oUl.children[0]){
+					oUl.insertBefore(oLi,oUl.children[0])
+				}else{
+					oUl.appendChild(oLi);
+				}
+				if(oUl.children.length>5){
+					oUl.removeChild(oUl.lastChild);
+				}
+				//点击当前a的时候删除他的父级
+				oA.onclick = function(){
+					oUl.removeChild(this.parentNode);
+				}
+				for(var j=0;j<aLi.length;j++){
+					aLi[j].onclick = function(){
+						if(onOff){
+							this.style.backgroundColor = 'red';
+							this.index = true;
+							//alert(this.index)
+							
+						}else{
+							this.style.backgroundColor = '';
+							this.index = false;
+							//alert(this.index)
+							//onOff=true;
+						}
+						onOff=!onOff;
+					}
+				}
+				aLi = oUl.getElementsByTagName('li');
+				
+			
+				
+			}
+			aBtn[2].onclick = function(){
+				//alert(aLi.length)
+				
+				for(var i=0;i<aLi.length;i++){
+					if(aLi[i].index){
+						//alert(aLi[i].innerHTML)
+						//alert(aLi[i].index)
+						oUl.removeChild(aLi[i])
+						//每执行一次删除一个li，删除之后ali的长度会少一个，所以i--
+						i--;
+
+					}
+					//alert(aLi[i].index)
+				}
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<input type="text">
+	<input type="button" value="留言">
+	<input type="button" value="删除">
+	<hr>
+	<ul id="list"></ul>
+	
+</body>
+</html>

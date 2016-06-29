@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		// var str = 'af 23 dsf3 432kj4 jklfj 943';
+		// var re = /\d+/g;
+		// alert(str.match(re))
+		// replace:替换
+		window.onload = function(){
+			var oText1 = document.getElementById('text1');
+			var oText2 = document.getElementById('text2');
+			var oBtn = document.getElementById('btn');
+			 oBtn.onclick = function(){
+			 	var re = /我们|你们|他们/g;
+			 	oText2.value = oText1.value.replace(re,'123')
+			 }
+		}
+	</script>
+</head>
+<body>
+	<textarea id="text1" rows="20" cols="40"></textarea>
+	<input type="button" value="过滤" id="btn">
+	<textarea id="text2" rows="20" cols="40"></textarea>
+</body>
+</html>

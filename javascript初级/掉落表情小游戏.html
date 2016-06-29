@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		li{list-style: none;}
+		#center{width:1000px;height:800px;margin:100px auto;text-align: center;position: relative;}
+		#conter{width:100%;height:700px;float:right;border:2px solid #666;margin-top:50px;background:#f1f1f1;position: relative;}
+		#icon{position: absolute;top:-30px;left:50px;}
+		#icon li{float:left;margin-right:60px;opacity: 0; position: relative;width:50px;height:50px;}
+		#df{position: absolute;top:80px;left:-105px;}
+		#df li{width:100px;height:80px;background-color: yellow;color:black;line-height: 80px;border-bottom: 5px solid white;}
+
+	</style>
+	<script src="ggq.js"></script>
+	<script>
+		window.onload = function(){
+			var oDiv = document.getElementById('center');
+			var oBtn = document.getElementsByTagName('input')[0];
+			var oList = document.getElementById('icon');
+			var aLi = oList.getElementsByTagName('li');
+			var aSpan = document.getElementsByTagName('span');
+			var n=Math.round(Math.random()*7);
+			var timer = null;
+			oBtn.onclick = function(){
+				var num1 = 0;
+				var num2 = 0;
+				var num3 = 5;
+				var num4 = 0;
+				clearInterval(timer)
+				 timer = setInterval(function(){
+					aLi[n].style.opacity = 1;
+					doMove(aLi[n],'top',num3,710,function(){
+						aLi[n].style.top = 0;
+						aLi[n].style.opacity = 0;
+						n=Math.round(Math.random()*7);
+						num1++;
+						num3++;
+					})
+					aLi[n].onclick = function(){
+						this.style.top = 710+'px';
+						this.style.opacity = 0;
+						num2++
+					}
+					num4 = num1-num2;
+					if(num4<0){
+						num4=0;
+					}
+					aSpan[0].innerHTML = num2;
+					aSpan[1].innerHTML = num4;
+					if(num4===10){
+						clearInterval(timer);
+						shake(oDiv,'left');
+						for(var i=0;i<aLi.length;i++){
+							aLi[i].style.top = 0
+						}
+
+					}
+				},1000)
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="center">
+		<h2>你的鼠标有多快</h2>
+		<input type="button" value="点击开始游戏">
+		<div id="conter">
+			<ul id="icon">
+				<li><img src="images/001.png"></li>
+				<li><img src="images/002.png"></li>
+				<li><img src="images/003.png"></li>
+				<li><img src="images/004.png"></li>
+				<li><img src="images/005.png"></li>
+				<li><img src="images/006.png"></li>
+				<li><img src="images/007.png"></li>
+				<li><img src="images/008.png"></li>
+			</ul>
+		</div>
+		<ul id="df">
+			<li>得分：<span>0</span></li>
+			<li>失败：<span>0</span></li>
+		</ul>
+	</div>
+</body>
+</html>

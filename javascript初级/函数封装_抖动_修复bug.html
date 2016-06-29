@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		img{position: absolute;top:200px;width:300px;height:200px;}
+	</style>
+	<script type="text/javascript" src="ggq.js"></script>
+	<script type="text/javascript">
+		
+		window.onload = function(){
+			/*
+			思路:
+			1）给事件添加一个开关并且封装到函数里
+			2）用开关来控制只有当前元素停止定时器时，才可以再次开启定时器
+			3）在封装的函数里控制开关当定时器执行时为true当定时器停止时开关变为false；
+			 */
+			var aImg = document.getElementsByTagName('img');
+			for(var i=0;i<aImg.length;i++){
+				aImg[i].style.left = 20+i*320+'px';
+				aImg[i].onOff = false;
+				aImg[i].onmouseover = function(){
+					if(!this.onOff ){
+						shake(this,'top')
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<img src="images/b1.jpg">
+	<img src="images/b2.jpg">
+	<img src="images/b2.jpg">
+	<img src="images/b3.jpg">
+</body>
+</html>

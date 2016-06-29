@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		li{list-style: none;}
+		#box{margin:50px 50px;}
+		#list{clear:both;}
+		#list p{float:left;margin-right: 20px;}
+		#list div{width:20px;height:20px;border:1px gray solid;margin-right:10px;float:left; }
+		
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oLi = document.getElementById('list');
+			var aDiv = oLi.getElementsByTagName('div');
+			var oText = oLi.getElementsByTagName('span')[0];
+			var color = ['gray','red']
+			var text = ['很差','较差','一般','不错','优秀'];
+			var num = NaN;
+			function fn1(){//重置：控制所有div的背景颜色和span里的文字为空，方便后面使用
+				for(var i=0;i<aDiv.length;i++){
+            		aDiv[i].style.background = '';
+            		oText.innerHTML = '';
+            	}
+			}
+			for(var i = 0;i < aDiv.length;i++){
+                aDiv[i].index = i;
+                aDiv[i].onmouseover = function () {
+                	fn1();//点击以后鼠标继续移入的时候点击过得颜色不会消失，所以要调用重置函数，使鼠标移入时所有添加过得的属性都消失
+                  	fn2(this);
+                }
+                aDiv[i].onclick = function(){
+                	num = this.index;//获取到当前点击按钮的自定义属性，方便鼠标移开是进行判断
+                	fn2(this);
+                }
+                aDiv[i].onmouseout = function(){
+                	fn1();//鼠标移开时重置所有属性，，，只有点击过得添加，，，所以num不能为null，，，因为null会转化为“0”
+            		if(num<2){
+                  		for(var j=0;j<=num;j++){
+	                  		aDiv[j].style.background = color[0];
+	                  		oText.innerHTML = text[num];
+                  		}
+	                }else{//当this.index>2的时候，控制所有小于2的div背景变为红色
+	                  	for(var j=0;j<=num;j++){
+	                  		aDiv[j].style.background = color[1];
+	                  		oText.innerHTML = text[num];
+                  		}
+                    }
+                }
+                function fn2(odiv){
+					if(odiv.index<2){
+	                  	for(var i=0;i<=odiv.index;i++){
+	                  		aDiv[i].style.background = color[0];
+	                  		oText.innerHTML = text[odiv.index];
+	                  	}
+	                } else{//当this.index>2的时候，控制所有小于2的div背景变为红色
+	                  	for(var i=0;i<=odiv.index;i++){
+	                  		aDiv[i].style.background = color[1];
+	                  		oText.innerHTML = text[odiv.index];
+	                  	}
+	                }
+				}
+            }
+
+
+		}
+	</script>
+</head>
+<body>
+	<ul id="box">
+		<li id="list">
+			<p>总体评价：</p>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<span></span>
+		</li>
+	</ul>
+</body>
+</html>

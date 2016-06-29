@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		//var str = '0';
+		//alert(str.charCodeAt(2))
+		//alert(String.fromCharCode(22937,21619))
+		//alert(str.charCodeAt())
+		
+	</script>
+</head>
+<body>
+	<input type="text">
+	<input type="button" value="检测">
+	<script type="text/javascript">
+		var aInp = document.getElementsByTagName('input');
+		aInp[1].onclick = function(){
+			if(fn1(aInp[0].value)&&aInp[0].value.length<12){
+				alert('正确')
+			}else{
+				alert('错误')
+			}
+		}
+		function deteNum(val){
+			var n=0
+			for(var i=0;i<val.length;i++){
+				n=val.charCodeAt(i)
+				if(n<48||n>57){
+					return false;
+				}
+			}
+			return true;
+		}
+	</script>
+</body>
+</html>

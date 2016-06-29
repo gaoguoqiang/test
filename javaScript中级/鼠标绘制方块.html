@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#div1{width:600px;height:600px;position: absolute;top:150px;left:600px;border:1px solid #666;}
+		#div1 .div2{border:1px red solid;position: absolute;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oDiv = document.getElementById('div1');
+			oDiv.onmousedown = function(ev){
+				var ev = ev || event;
+				var disX = ev.clientX;
+				var disY = ev.clientY;
+				var disT = disY - oDiv.offsetTop;
+				var disL = disX - oDiv.offsetLeft;
+				var oBox = document.createElement('div');
+				oBox.className = 'div2';
+				
+				
+				//alert(disX)
+				oDiv.onmousemove = function(ev){
+					var ev = ev || event;
+					var oBoxW = ev.clientX - disX;
+					var oBoxH = ev.clientY - disY;
+					oDiv.appendChild(oBox)
+					//Math.min~~取一组字中最小的值
+					oBox.style.top = Math.min(ev.clientY-oDiv.offsetTop,disT) + 'px';
+					oBox.style.left = Math.min(ev.clientX-oDiv.offsetLeft,disL) + 'px';
+					//Math.abs取绝对值
+					oBox.style.width = Math.abs(oBoxW) + 'px';
+					oBox.style.height = Math.abs(oBoxH) + 'px';
+					
+
+					
+					//oBox.style.height = oBoxH + 'px';
+				}
+				document.onmouseup = function(){
+					oDiv.onmousemove = null;
+				}
+				return false;
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+	
+</body>
+</html>

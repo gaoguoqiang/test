@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin:0;}
+		li{list-style: none;}
+		body{background: #333;}
+		.box{width:940px;position: relative;top:50px;}
+		.box img{width:940px;height:529px;background: #fff;}
+		.box p,span{width:940px;line-height: 30px;text-align: center;color:white;background: #000;position: absolute;}
+		.box p{top:0;}
+		.box span{bottom:0;}
+		.box ul{position: absolute;top:0;left:950px;}
+		.box li{width:50px;height:50px;background: #000;margin-bottom: 10px;}
+		.box .active{background: yellow}
+	</style>
+	<script>
+		window.onload = function(){
+			fn1('center1',['images/b1.jpg','images/b2.jpg','images/b3.jpg','images/b4.jpg'],['图片1','图片2','图片3','图片4'],'onclick');
+			fn1('center2',['images/b1.jpg','images/b2.jpg','images/b3.jpg'],['图片1','图片2','图片3'],'onmouseover');
+			function fn1(id,src,text,evt){
+				var oDiv = document.getElementById(id);
+				var oImg = oDiv.getElementsByTagName('img')[0];
+				var oP = oDiv.getElementsByTagName('p')[0];
+				var oSpan = oDiv.getElementsByTagName('span')[0];
+				var oUl = oDiv.getElementsByTagName('ul')[0];
+				var oLi = oUl.getElementsByTagName('li');
+				var num = 0;
+				for(var i=0;i<src.length;i++){
+					oUl.innerHTML += '<li></li>'
+				}
+				function ooo(){
+					oImg.src = src[num];
+					oP.innerHTML = 1+num + '/' + src.length;
+					oSpan.innerHTML = text[num];
+					for(var i=0;i<oLi.length;i++){
+								oLi[i].className = '';
+							}
+					oLi[num].className = 'active';
+				};
+				ooo();
+				for(var i=0;i<oLi.length;i++){
+					oLi[i].index = i;
+					oLi[i][evt] = function(){
+						num = this.index;
+						ooo();
+					}
+				}
+			}
+
+		}
+	</script>
+</head>
+<body>
+	<div id="center1" class="box">
+		<img src="">
+		<p>图片数量计算中</p>
+		<span>文字加载中</span>
+		<ul>
+		</ul>
+	</div>
+	<div id="center2" class="box">
+		<img src="">
+		<p>图片数量计算中</p>
+		<span>文字加载中</span>
+		<ul>
+		</ul>
+	</div>
+</body>
+</html>

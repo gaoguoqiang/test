@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		li{list-style: none;}
+		ul li{float:left;margin-bottom: 50px;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oDiv = document.getElementById('center');
+			var aBtn = oDiv.getElementsByTagName('input');
+			var aUl = oDiv.getElementsByTagName('ul');
+			var aLi = oDiv.getElementsByTagName('li');
+			var aImg = oDiv.getElementsByTagName('img');
+			var aH1 = oDiv.getElementsByTagName('h1');
+			var arr = [1,2,3,4,5,6,7,8];
+			var arr2 = [];
+			var timer = null;
+
+			aBtn[0].onclick = function(){
+				//sort用来排序
+				//return>0~~~~b前a后
+				//return<0~~~~a前b后
+				//小问题：如果return a+b    顺序颠倒
+				arr.sort(function(a,b){
+					return b-a
+				})
+				//alert(arr)
+				for(var i=0;i<aImg.length;i++){
+					aImg[i].src = 'images/'+arr[i]+'.jpg';
+				}
+			}
+			aBtn[1].onclick = function(){
+				arr2=[]
+				clearInterval(timer);
+				timer = setInterval(function(){
+					arr2.push(Math.round(Math.random()*7+1));
+					for(var j=0;j<arr2.length;j++){
+						for(var x=j+1;x<arr2.length;x++){
+							if(arr2[j]==arr2[x]){
+								arr2.splice(x,1);
+								x--;
+							}
+						}
+					}
+					if(arr2.length===aImg.length){
+						clearInterval(timer);
+						for(var i=0;i<aImg.length;i++){
+							aImg[i].src = 'images/'+arr2[i]+'.jpg';
+						}
+					}
+				},1)
+				
+			}
+			
+		}
+	</script>
+</head>
+<body>
+	<div id="center">
+		<input type="button" value="从大到小">
+		<input type="button" value="打乱顺序">
+		<ul>
+			<li><img src="images/1.jpg"></li>
+			<li><img src="images/2.jpg"></li>
+			<li><img src="images/3.jpg"></li>
+			<li><img src="images/4.jpg"></li>
+		</ul>
+		<ul>
+			<li><img src="images/5.jpg"></li>
+			<li><img src="images/6.jpg"></li>
+			<li><img src="images/7.jpg"></li>
+			<li><img src="images/8.jpg"></li>
+		</ul>
+	</div>
+</body>
+</html>

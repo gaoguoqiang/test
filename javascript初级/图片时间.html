@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			var aImg = document.getElementsByTagName('img');
+			var op = document.getElementsByTagName('p')[0];
+			function fnTime(){
+				var myTime = new Date();
+				var myHours = myTime.getHours();//时
+				var myMin = myTime.getMinutes();//分
+				var mySec = myTime.getSeconds();//秒
+				var str = '';
+				str = fn2(myHours)+fn2(myMin)+fn2(mySec);
+				op.innerHTML = str;
+				for(var i=0;i<aImg.length;i++){
+					aImg[i].src = 'images/'+str.charAt(i)+'.jpg';
+				}
+			}
+			setInterval(fnTime,1000);
+			fnTime();
+			function fn2(n){
+				return n<10?'0'+n:''+n;
+			}
+		}
+	</script>
+</head>
+<body>
+	<p></p>
+	<img src="images/6.jpg">
+	<img src="images/7.jpg">
+	<img src="images/8.jpg">
+	<img src="images/9.jpg">
+	<img src="images/8.jpg">
+	<img src="images/9.jpg">
+</body>
+</html>

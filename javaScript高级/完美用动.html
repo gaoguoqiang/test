@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#div1{width:100px;height:100px;background: red;filter: alpha(opacity=30);opacity: 0.3;}
+	</style>
+	<script src="ggq.js"></script>
+	<script>
+		window.onload = function(){
+			var oDiv = document.getElementById('div1');
+			var oBtn = document.getElementById('btn1');
+			oBtn.onclick = function(){
+				startMove(oDiv,{width:200,height:200,opacity:100})
+			}
+		}
+		function startMove(obj,json,endFn){
+			//obj是控制的对象；
+			//attr是改变什么样式；
+			//target是改变的目标；
+			//endFn是停止后执行的函数
+			//先清除定时器，以防多次点击重复开启定时器
+			clearInterval(obj.timer);
+			obj.timer = setInterval(function(){
+				//onoff是开关，用来检测是否所有的运动都已完成，初始值为true
+				var onOff = true;
+				//遍历json：attr是json的“下标”，也就是要改变的样式{width：200}//////{attr：json[attr]}
+				for(var attr in json){
+					var curn = 0;
+					//获取元素属性
+					if(attr == 'opacity'){
+						//透明度的值在标准下是0~1的小数，ie下是0~100的整数，而此处获取到的值为小数，所以*100，变为0~100的整数
+						//为了处理小数带来的bug，所以转型为整数
+						curn = parseInt(parseFloat(getStyle(obj,attr))*100);
+					}else{
+						curn = parseInt(getStyle(obj,attr));
+					}
+					//获取速度：(目标值-当前值)/8，得到一个越靠近目标点，越小的值
+					var speed = (json[attr]-curn)/8;
+					//小数会带来不能精确地bug，所以要取整
+					//当速度为正的时候，向上取整，反之向下取整
+					speed = speed>0?Math.ceil(speed):Math.floor(speed);
+					//检测是否所有的运动都已完成，如果其中一个没有完成，开关的值为false
+					if(curn!=json[attr]){
+						onOff = false;
+					}
+					if(attr == 'opacity'){
+						obj.style.opacity = (curn + speed)/100;
+						obj.style.filter = 'alpha(opacity='+(curn + speed)+')';
+					}else{
+						obj.style[attr] = curn + speed + 'px';
+					}
+				}
+				if(onOff){
+					clearInterval(obj.timer);
+					endFn&&endFn();
+				}
+				
+			},30)
+		}
+	</script>
+</head>
+<body>
+	<input id="btn1" type="button">
+	<div id="div1"></div>
+</body>
+</html>

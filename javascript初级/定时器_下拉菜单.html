@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		li{list-style: none;}
+		a{color:black;text-decoration: none;}
+		#box{width:500px;height:50px;margin:50px auto;border:1px solid #333;position: relative;}
+		#box span{display:block;float:left;width:150px;border:solid 1px white;text-align: center;line-height: 20px;font-size:18px;background: blue;}
+		#box ul{position: absolute;clear:both;background: red;display: none;}
+		#box ul li{width:50px;line-height: 20px;text-align: center;float:left;}
+		#box ul li a:hover{text-decoration:underline;}
+		.list1{top:25px;left:10px;}
+		.list2{top:25px;left:170px;}
+		.list3{top:25px;left:300px;}
+
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oDiv = document.getElementById('box');
+			var aBtn = oDiv.getElementsByTagName('span');
+			var aUl = oDiv.getElementsByTagName('ul');
+			var that = null;
+			var that2 = null;
+			var timer = null;
+			//给每一个ul添加自定义属性
+			for(var j=0;j<aUl.length;j++){
+				aUl[j].inde = j;
+			}
+			//给每一个btn添加自定义属性，使之与ul对应
+			for(var i=0;i<aBtn.length;i++){
+				aBtn[i].index = i;
+				aBtn[i].onmouseover = function fn1(){
+					//每次进入重置所有样式
+					for(var i=0;i<aUl.length;i++){
+						aUl[i].style.display = 'none'
+					}
+					this.style.background = 'gray';
+					aUl[this.index].style.display = 'block';
+				}
+				aBtn[i].onmouseout = function fn2(){
+					that = this.index;//获取当前的下标，
+					this.style.background = 'blue';
+					timer = setTimeout(function(){
+						//控制当前下标对应的ul隐藏
+						aUl[that].style.display = 'none';
+					},1000)
+					aUl[this.index].onmouseover = function(){
+						that2 = this.inde;//获取当前下标
+						this.style.display = 'block';
+						//进入当前ul时停止定时器，就不会隐藏了
+						clearInterval(timer)
+					}
+					aUl[this.index].onmouseout = function(){
+						//控制之前获取的下标所对应的ul继续开定时器隐藏
+						timer = setTimeout(function(){
+						aUl[that2].style.display = 'none';
+					},1000)
+					}
+				}
+								
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<ul class="list1">
+			<li><a>a</a></li>
+			<li><a>b</a></li>
+			<li><a>c</a></li>
+		</ul>
+		<ul class="list2">
+			<li><a>A</a></li>
+			<li><a>B</a></li>
+			<li><a>C</a></li>
+		</ul>
+		<ul class="list3">
+			<li><a>x</a></li>
+			<li><a>y</a></li>
+			<li><a>z</a></li>
+		</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		function fn1(){
+			alert(1);
+		}
+		function fn2(){
+			alert(2);
+		}
+		//document.onclick = fn1;
+		// document.attachEvent('onclick',fn1);
+		// document.attachEvent('onclick',fn2);
+		document.addEventListener('click',fn1,false);
+		document.addEventListener('click',fn2,false);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

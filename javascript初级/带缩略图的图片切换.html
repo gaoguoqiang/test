@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin:0;}
+		a{color:white;text-decoration: none;}
+		li{list-style: none;}
+		body{background: #333;}
+		#center{width:940px;margin:50px auto;position: relative;}
+		#center img{display: block;width:940px;height: 529px;}
+		#center span,p{width:940px;line-height: 30px;text-align: center;color:white;background: black;filter: alpha(opacity=50);opacity: 0.5;position: absolute;left:0;}
+		#center span{top:0;}
+		#center p{top:499px;}
+		#left,#right{width:48px;height:48px;border:1px solid white;background: black;filter: alpha(opacity=50);opacity:0.5;color:white;font-size: 40px;text-align: center;line-height: 48px;position: absolute;}
+		#left{top:240px;left:0;}
+		#right{top:240px;right:0;}
+		#list{margin:10px auto;width:60px;}
+		#list li{width:8px;height: 8px;border:1px solid white;margin-right: 5px;float:left;position: relative;}
+		#list .active{background: red;}
+		#list li img{width:80px;height:50px;position: absolute;top:-52px;left:50%;margin-left:-40px;background: #333;display: none;}
+	</style>
+	<script>
+		window.onload = function(){
+			var odiv = document.getElementById('center');
+			var oimg = odiv.getElementsByTagName('img')[0];
+			var ospan = odiv.getElementsByTagName('span')[0];
+			var op = odiv.getElementsByTagName('p')[0];
+			var oleft = document.getElementById('left');
+			var oright = document.getElementById('right');
+			var oul = document.getElementById('list');
+			var ali = oul.getElementsByTagName('li');
+			var aimg = null;
+			var arrimg = [];
+
+			var aurl = ['images/b1.jpg','images/b2.jpg','images/b3.jpg','images/b4.jpg'];
+			var atext = ['图片1','图片2','图片3','图片4'];
+			var num = 0;
+
+			function cz(){//初始化且添加li点击时的类“active”
+				oimg.src = aurl[num];
+				ospan.innerHTML = 1 + num + '/' + aurl.length;
+				op.innerHTML = atext[num];
+				for(var i=0;i<ali.length;i++){
+					ali[i].className = '';
+				} 
+
+ 
+				ali[num].className = 'active';
+			}
+			cz();
+			//点击左右按钮翻页（顺序切换不轮播）
+			oleft.onclick = function(){
+				num--;
+				if(num==-1){
+					num=3;
+				}
+				cz();
+			}
+			oright.onclick = function(){
+				num++;
+				if(num==aurl.length){
+					num=0;
+				}
+				cz();
+			}
+			//获取li里的img
+			for(var i=0;i<ali.length;i++){
+				aimg = ali[i].getElementsByTagName('img');
+
+					for(var j=0;j<aimg.length;j++){
+					arrimg.push(aimg[j]);
+				}
+			}alert(arrimg);
+			//鼠标移入li显示当前图片缩略图，并跳转到对应图片
+			for(var i=0;i<ali.length;i++){
+				ali[i].index = i;
+				ali[i].onmouseover = function(){
+					num = this.index;
+					cz();
+					for(var j=0;j<arrimg.length;j++){
+					arrimg[j].style.display = 'none';
+				}
+				arrimg[num].style.display = 'block'
+				}
+				ali[i].onmouseout = function(){
+					arrimg[num].style.display = 'none';
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="center">
+		<img src="">
+		<span>图片数量计算中</span>
+		<p>文字加载中</p>
+		<a id="left"><</a>
+		<a id="right">></a>
+		<ul id="list">
+			<li>
+				<img src="images/b1_1.png">
+			</li>
+			<li>
+				<img src="images/b2_2.png">
+			</li>
+			<li>
+				<img src="images/b3_3.png">
+			</li>
+			<li>
+				<img src="images/b4_4.png">
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

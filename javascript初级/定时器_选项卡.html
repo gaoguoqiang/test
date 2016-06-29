@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin:0;}
+		li{list-style: none;}
+		#box{margin:50px auto;width:500px;border:1px solid #333;position: relative;}
+		#box img{width:300px;height:300px;clear:both;display: block;}
+		#box h3{float:left;margin-right: 5px;background: green;width:60px;line-height: 30px;text-align: center;}
+		#box .list{width:200px;height:300px;position: absolute;top:30px;right:0;display: none;}
+		#box .list li{width:100%;height:100px;background: #ff6;text-align: center;line-height: 100px;}
+
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oDiv = document.getElementById('box');
+			var aBtn = oDiv.getElementsByTagName('h3');
+			var aImg = oDiv.getElementsByTagName('img')[0];
+			var aUl = oDiv.getElementsByClassName('list');
+			var aLi1 = aUl[0].getElementsByTagName('li');
+			var aLi2 = aUl[1].getElementsByTagName('li');
+			var aUrl1 = ['images/b1.jpg','images/b2.jpg','images/b3.jpg']
+			var aUrl2 = ['images/01.jpg','images/02.jpg','images/03.jpg']
+			var num = 0;
+			var n = 0;
+			function fn2(){
+				//所有的按钮颜色为默认绿色
+				for(var i=0;i<aBtn.length;i++){
+					aBtn[i].style.background = 'green'
+				}
+				//当前为蓝色
+				aBtn[n].style.background = 'blue';
+				aImg.src = aUrl1[n];//可能有点小bug，一直默认是第一组图片的地址，但不影响功能~~~
+				//所有的ul隐藏
+				for(var j=0;j<aUl.length;j++){
+					aUl[j].style.display = 'none';
+				}
+				//当前显示
+				aUl[n].style.display = 'block';
+				aLi1[n].style.background = 'red';//好像也有bug，和图片一样~~~~
+			}
+			fn2();
+			function fn3(a,b){
+				for(var i=0;i<a.length;i++){
+						a[i].style.background = '#ff6'
+					}
+					aImg.src = b[num]
+					a[num].style.background = 'red'
+					num++;	
+			}
+			function fn1(){
+				if(n==0){//当n等于0的时候，图片一所在的组滚动
+					fn2();
+					fn3(aLi1,aUrl1);	
+					if(num == aUrl1.length){
+						n=1;
+						num =0;
+					}				
+				}else{
+					fn2();
+					fn3(aLi2,aUrl2)
+					if(num==aUrl2.length){
+						n=0;
+						num=0;
+					}
+				}
+			}
+			var timer = setInterval(fn1,1000);
+		}
+	</script>
+</head>
+<body>
+	
+	<div id="box">
+		<h3>图片1</h3>
+		<h3>图片2</h3>
+		<img src="">
+		<ul class="list">
+			<li>11111</li>
+			<li>22222</li>
+			<li>33333</li>
+		</ul>
+		<ul class="list">
+			<li>44444</li>
+			<li>55555</li>
+			<li>66666</li>
+		</ul>
+	</div>
+
+</body>
+</html>

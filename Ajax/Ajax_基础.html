@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="ajax.js"></script>
+	<script>
+		window.onload = function(){
+			var oBtn = document.getElementById('btn');
+			oBtn.onclick = function(){
+				ajax('abc.txt',function(){
+					alert(str);
+				})
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" id="btn" value="按钮">
+</body>
+</html>

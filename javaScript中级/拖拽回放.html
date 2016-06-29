@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#div1{width:100px;height:100px;background-color: red;position: absolute;top:50px;left:50px;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oDiv = document.getElementById('div1');
+			var oBtn = document.getElementsByTagName('input')[0];
+			var left = [];
+			var top = [];
+			oDiv.onmousedown = function(ev){
+				var ev = ev || event;
+				var disX = ev.clientX-this.offsetLeft;
+				var disY = ev.clientY-this.offsetTop;
+
+				document.onmousemove = function(ev){
+					var ev = ev || event;
+					var L = ev.clientX-disX;
+					var T = ev.clientY-disY;
+					oDiv.style.top = T + 'px';
+					oDiv.style.left = L + 'px';
+					left.unshift(L);
+					top.unshift(T);
+
+				}
+				document.onmouseup = function(){
+					document.onmousemove = null;
+				}
+				return false;
+			}
+			oBtn.onclick = function(){
+				var n = 0;
+				oBtn.timer = setInterval(function(){
+					oDiv.style.top = top[n] + 'px';
+					oDiv.style.left = left[n] + 'px';
+					n++;
+					if(n == left.length){
+						//n=0;
+						clearInterval(oBtn.timer);
+						left = [];
+						top = [];
+						//alert(8)
+						n=0;
+					}
+				},10)
+
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value="回放">
+	<div id="div1"></div>
+</body>
+</html>

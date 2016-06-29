@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		span{margin-right: 20px;}
+	</style>
+	<script>
+		window.onload = function(){
+			var oDiv = document.getElementById('div1');
+			var aDl = document.getElementsByTagName('dl');
+			for(var i=0;i<aDl.length;i++){
+				aDl[i].index = i;
+				var oSpan = document.createElement('span');
+				oDiv.appendChild(oSpan);
+				var aDd = aDl[i].getElementsByTagName('dd');
+				for(var j=0;j<aDd.length;j++){
+					aDd[j].onclick = function(){
+						var aSpan = document.getElementsByTagName('span');
+						aSpan[this.parentNode.index].innerHTML = this.innerHTML;
+					}
+				}
+			}
+
+		}
+	</script>
+</head>
+<body>
+	<dl>
+		<dt>地区</dt>
+		<dd>宁武</dd>
+		<dd>忻州</dd>
+		<dd>太原</dd>
+		<dd>北京</dd>
+	</dl>
+	<dl>
+		<dt>职位</dt>
+		<dd>前端工程师</dd>
+		<dd>网页设计</dd>
+		<dd>网页制作</dd>
+	</dl>
+	<dl>
+		<dt>薪资</dt>
+		<dd>8000</dd>
+		<dd>5000</dd>
+		<dd>3000</dd>
+	</dl>
+	<div id="div1"></div>
+</body>
+</html>

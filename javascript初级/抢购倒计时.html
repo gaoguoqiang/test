@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		li{list-style: none;}
+		#box{width:1000px;margin:20px auto;}
+		#list1 li{float:left;margin-right: 30px;width:300px;text-align: center;position: relative;}
+		#list1 div{position: relative;top:0;opacity: 1;}
+		#list1 img{width:180px;height:200px;}
+		#list1 a{line-height:200px;position: absolute;top:0;display: none;}
+		#list2 li{margin-bottom: 10px;width:1000px;height:50px;background: #f1f1f1;position: relative;line-height: 50px;display: none;}
+		#list2 p,#list2 span{float:left;margin-right:300px;}
+		#list2 img{float:right;margin-right: 50px;margin-top:5px;width:60px;height:40px;}
+		#fg{width:1000px;height:20px;background: red;clear:both;margin-bottom: 30px;}
+	</style>
+	<script src="ggq.js"></script>
+	<script>
+		window.onload = function(){
+			var oList1 = document.getElementById('list1');
+			var oList2 = document.getElementById('list2');
+			var oJg = document.getElementById('jg');
+			var aBtn = oList1.getElementsByClassName('btn');
+			var aText = oList1.getElementsByClassName('text');
+			var aP = oList1.getElementsByTagName('p');
+			var aA = oList1.getElementsByTagName('a');
+			var aDiv = oList1.getElementsByTagName('div');
+			var aLi1 = oList1.getElementsByTagName('li');
+			var aLi2 = oList2.getElementsByTagName('li');
+			var aP2 = oList2.getElementsByTagName('p');
+			var aSpan2 = oList2.getElementsByTagName('span');
+			var aImg2 = oList2.getElementsByTagName('img');
+			var aImg1 = oList1.getElementsByTagName('img');
+			var aH3 = oList1.getElementsByTagName('h3');
+			var aSpan1 = oList1.getElementsByTagName('span');
+			var t = 0;
+			var str = '';
+			for(var i=0;i<aBtn.length;i++){
+				aBtn[i].index = i;
+			}
+			//alert(Number(aSpan2[0].innerHTML))
+			function fn1(abc,obj){
+				//这俩个变量放在函数里是因为每次点击的时候都要重新获取时间，否则就会导致所有的时间都一样因为放在外边是全局变量
+				var iNew = null;
+				var iNow = null;
+				iNew = new Date(aText[abc].value);
+				//每次点击前清除定时器，防止重复点击，用自定义属性来管理定时器，防止清除掉别的定时器
+				clearInterval(obj.timer)
+				obj.timer = setInterval(function(){
+					//不停的获取当前时间
+					iNow = new Date();
+					//得到未来时间和当前时间的差，单位是毫秒，所以除以1000，并且向下取整
+					t = Math.floor((iNew-iNow)/1000);
+					str = Math.floor(t/86400)+'天'+Math.floor(t%86400/3600)+'时'+Math.floor(t%86400%3600/60)+'分'+t%60+'秒';
+					aP[abc].innerHTML = str;
+					if(t===0){
+						//当差为0时，停止定时器
+						clearInterval(obj.timer);
+						shake(aDiv[abc],'left',function(){
+							doMove(aDiv[abc],'top',20,200,function(){
+								//这里必须用透明度来隐藏，设置为“none”时，会导致元素消失，想要获取的内容也会消失
+								opacity(aDiv[abc],0.2,0)
+								aLi2[abc].style.display = 'block';
+								aP2[abc].innerHTML = aH3[abc].innerHTML;
+								aSpan2[abc].innerHTML = aSpan1[abc].innerHTML;
+								aImg2[abc].src = aImg1[abc].src;
+								aA[abc].style.display = 'block';
+								//接下来是关键******Number来转换aspan2的值，当他没有的时候为0，把三个加起来，得到总价
+								oJg.innerHTML = Number(aSpan2[0].innerHTML)+Number(aSpan2[1].innerHTML)+Number(aSpan2[2].innerHTML);
+							});
+							
+						});
+					}
+				},1000)
+			}
+			aBtn[0].onclick = function(){
+					var v = this.index;
+					fn1(v,aBtn[0]);
+				}
+			aBtn[1].onclick = function(){
+					var v = this.index;
+					fn1(v,aBtn[1]);
+				}
+			aBtn[2].onclick = function(){
+					var v = this.index;
+					fn1(v,aBtn[2]);
+				}
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ul id="list1">
+			<li>
+				<div>
+					<input class="text" type="text" value="May 1,2016,10:10:10">
+					<input class="btn" type="button" value="确定">
+					<p>123456789789</p>
+					<img src="images/01.jpg">
+					<h3>疯狂抢购微波炉</h3>
+					<span>400</span>
+				</div>
+				<a>商品已下架</a>
+			</li>
+			<li>
+				<div>
+					<input class="text" type="text" value="May 1,2016,10:10:10">
+					<input class="btn" type="button" value="确定">
+					<p>123456789789</p>
+					<img src="images/02.jpg">
+					<h3>疯狂抢购电饭锅</h3>
+					<span>100</span>
+				</div>
+				<a>商品已下架</a>
+			</li>
+			<li>
+				<div>
+					<input class="text" type="text" value="May 1,2016,10:10:10">
+					<input class="btn" type="button" value="确定">
+					<p>123456789789</p>
+					<img src="images/03.jpg">
+					<h3>疯狂抢购你妹</h3>
+					<span>1000</span>
+				</div>
+				<a>商品已下架</a>
+			</li>
+		</ul>
+		<div id="fg"></div>
+		<ul id="list2">
+			<li>
+				<p></p>
+				<span></span>
+				<img src="">
+			</li>
+			<li>
+				<p></p>
+				<span></span>
+				<img src="">
+			</li>
+			<li>
+				<p></p>
+				<span></span>
+				<img src="">
+			</li>
+		</ul>
+		总价：<span id="jg">0</span>元
+	</div>
+</body>
+</html>

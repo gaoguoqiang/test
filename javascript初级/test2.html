@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{width:200px; height:200px;background: blue; display: none;}
+	</style>
+	<script>
+		window.onload = function(){
+			
+			var obtn1 = document.getElementById('show')
+
+			var obtn2 = document.getElementById("hide")
+			var odiv1 = document.getElementById("div1")
+			obtn1.onclick = function(){
+				odiv1.style.display = 'block';
+			};
+			obtn2.onclick = function(){
+				odiv1.style.display = 'none';
+			};
+			
+		}
+
+	</script>
+</head>
+<body>
+	<input id="show" type="button" value="显示">
+	<input id="hide" type="button" value="隐藏">
+	<div id="div1"></div>
+	
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		ul{padding:0;margin:0;list-style: none;}
+		ul{padding:0;margin:0;text-decoration: none;}
+		#box{width:940px;border:1px solid gray;margin:50px auto;position: relative;}
+		#top_img{position: relative;width:940px;height:529px;}
+		.big_img li{position: absolute;overflow: hidden;}
+		.prey,.next{width:38px;height:79px;position: absolute;top:50%;margin-top: -40px;filter: alpha(opacity=0);opacity: 0;z-index: 1001;}
+		.prey{background: url(images/xia2.png);left:10px;}
+		.next{background: url(images/xia1.png);right:10px;}
+		.left,.right{width:470px;height:529px;position: absolute;top:0;z-index: 1000;}
+		.left{left:0;}
+		.right{right:0;}
+		.bottom_text{width:100%;position: absolute;bottom:0;background-color: black;filter: alpha(opacity=50);opacity: 0.5;color: white;z-index: 999;}
+		.text{float:left;}
+		.num{float:right;}
+		#bottom_img{width:921px;height:300px;border:10px solid #666;position: relative;overflow: hidden;}
+		.small_img{position: absolute;top:0;left:0; height:300px;}
+		.small_img li{float:left;width:307px;height:300px;filter: alpha(opacity=60);opacity: 0.6;}
+		.small_img li img{width:307px;height:300px;}
+
+	</style>
+	<script src="ggq.js"></script>
+	<script>
+		window.onload = function(){
+			var oBox = document.getElementById('box');
+			var bottom = document.getElementById('bottom_img');
+			var top = document.getElementById('top_img');
+			var smallImg = getByClass(bottom,'small_img')[0];
+			var bjgImg = getByClass(top,'big_img')[0];
+			var smallImgs = smallImg.getElementsByTagName('li');
+			var bjgImgs = bjgImg.getElementsByTagName('li');
+			var oLeft = getByClass(top,'left')[0];
+			var oRight = getByClass(top,'right')[0];
+			var prey = getByClass(top,'prey')[0];
+			var next = getByClass(top,'next')[0];
+			var oText = getByClass(getByClass(top,'bottom_text')[0],'text')[0];
+			var oNum = getByClass(getByClass(top,'bottom_text')[0],'num')[0];
+
+
+			var arrText = ['图片一','图片二','图片三','图片四',]
+			var now = 0;
+			var minIndex = 2;
+			var timer = null;
+			//动态获取图片的总长度
+			smallImg.style.width = smallImgs[0].offsetWidth*smallImgs.length+'px';
+			//箭头的鼠标移入移出变化
+			prey.onmouseover = oLeft.onmouseover = function(){
+				startMove(prey,'opacity',100)
+			}
+			prey.onmouseout = oLeft.onmouseout = function(){
+				startMove(prey,'opacity',0)
+			}
+			next.onmouseover = oRight.onmouseover = function(){
+				startMove(next,'opacity',100)
+			}
+			next.onmouseout = oRight.onmouseout = function(){
+				startMove(next,'opacity',0)
+			}
+			//下面图片的变化
+			for(var i=0;i<smallImgs.length;i++){
+				smallImgs[i].index = i;
+				oText.innerHTML = arrText[0];
+				oNum.innerHTML = now+1+'/'+smallImgs.length;
+				smallImgs[i].onmouseover = function(){
+					startMove(this,'opacity',100);
+				}
+				//鼠标移出时被点击过得图片不发生变化
+				smallImgs[i].onmouseout = function(){
+					if( this.index!=now ){
+						startMove(this,'opacity',60);
+					}
+				}
+				smallImgs[i].onclick = function(){
+					if(this.index == now)return;
+					now = this.index;
+					for(var i=0;i<smallImgs.length;i++){
+						startMove(smallImgs[i],'opacity',60);
+					}
+					tab();
+				}
+			}
+			function tab(){
+				//now是被点击图片的索引值
+				startMove(smallImgs[now],'opacity',100);
+				//上面图片有层级关系，所以每次点击都要给当前图片加一个相对较高的z-index
+				bjgImgs[now].style.zIndex = minIndex++;
+				bjgImgs[now].style.height=0;
+				startMove(bjgImgs[now],'height',top.offsetHeight);
+				if(now==0){
+					startMove(smallImg,'left',0);
+				}else if(now == smallImgs.length-1){
+					startMove(smallImg,'left',-(now-2)*smallImgs[0].offsetWidth);
+				}else{
+					startMove(smallImg,'left',-(now-1)*smallImgs[0].offsetWidth);
+				}
+				oText.innerHTML = arrText[now];
+				oNum.innerHTML = now+1+'/'+smallImgs.length;
+			}
+			fn1()
+			function fn1(){
+				timer = setInterval(function(){
+					now++;
+					if(now==smallImgs.length){
+						now=0;
+					}
+					for(var i=0;i<smallImgs.length;i++){
+							startMove(smallImgs[i],'opacity',60);
+						}
+					startMove(smallImgs[now],'opacity',100);
+					
+					tab();
+				},2000)
+			}
+			
+			oBox.onmouseover = function(){
+				clearInterval(timer);
+			}
+			oBox.onmouseout = function(){
+				fn1();
+			}
+			
+			prey.onclick = function(){
+				now--;
+				if(now==-1){
+					now=smallImgs.length-1;
+				}
+				tab();
+			}
+			next.onclick = function(){
+				now++;
+				if(now==smallImgs.length){
+					now=0;
+				}
+				tab();
+			}
+
+			function getByClass(parent,className){
+				var aEls = parent.getElementsByTagName('*');
+				var arr = [];
+				for(var i=0;i<aEls.length;i++){
+					if(aEls[i].className == className){
+						arr.push(aEls[i]);
+					}
+				}
+				return arr;
+			}
+
+			function startMove(obj,attr,target,endFn){
+				//obj是控制的对象；
+				//attr是改变什么样式；
+				//dir是改变的速度；
+				//target是改变的目标；
+				//endFn是停止后执行的函数
+				//控制方向，如果当前位置小于目标位置是正数，反之是负数
+				
+				clearInterval(obj.timer);//先清除定时器，以防多次点击重复开启定时器
+				//alert(parseInt(getStyle(aImg,'top')))~~去除获取到的样式的单位（px）
+				obj.timer = setInterval(function(){
+					var curn = 0;
+					if(attr == 'opacity'){
+						curn = parseInt(parseFloat(getStyle(obj,attr))*100);
+					}else{
+						curn = parseInt(getStyle(obj,attr));
+					}
+					var speed = (target-curn)/8;
+					speed = speed>0?Math.ceil(speed):Math.floor(speed);
+					if(curn == target){
+						clearInterval(obj.timer);
+						//endFn&&endFn();
+					}else{
+						if(attr == 'opacity'){
+							obj.style.opacity = (curn + speed)/100;
+							obj.style.filter = 'alpha(opacity='+(curn + speed)+')';
+						}else{
+							obj.style[attr] = curn + speed + 'px';
+						}
+						
+					}
+				},30)
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<div id="top_img">
+			<div class="prey"></div>
+			<div class="next"></div>
+			<a href="javascript:;" class="left"></a>
+			<a href="javascript:;" class="right"></a>
+			
+			<ul class="big_img">
+				<li style="z-index: 1;"><img src="images/b1.jpg"></li>
+				<li><img src="images/b2.jpg"></li>
+				<li><img src="images/b3.jpg"></li>
+				<li><img src="images/b4.jpg"></li>
+			</ul>
+			<div class="bottom_text">
+				<div class="text">图片说明加载中</div>
+				<div class="num">图片数量计算中</div>
+			</div>
+		</div>
+		<div id="bottom_img">
+			<ul class="small_img">
+				<li><img src="images/b1.jpg"></li>
+				<li><img src="images/b2.jpg"></li>
+				<li><img src="images/b3.jpg"></li>
+				<li><img src="images/b4.jpg"></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

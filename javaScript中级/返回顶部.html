@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		window.onload = function () {
+			var oDiv = document.getElementsByTagName('div')[0];
+			var window_height = document.documentElement.clientHeight;
+			var window_height_new = 0;
+			var divHeight = parseInt(oDiv.style.height);
+			window.onscroll = function(){
+				window_height_new = document.documentElement.scrollTop||document.body.scrollTop;
+				if(window_height_new>500){
+					oDiv.style.display = 'block';
+					oDiv.style.top = window_height+window_height_new-divHeight+'px';
+				}
+			}
+			oDiv.onclick = function(){
+				document.body.scrollTop=document.documentElement.scrollTop = 0;
+				this.style.display = 'none'
+			}
+
+		}
+	</script>
+</head>
+<body style="height:2000px">
+	<div style="width:50px;height:50px;background-color: red;position: absolute;right:0;display: none;"></div>
+	
+</body>
+</html>

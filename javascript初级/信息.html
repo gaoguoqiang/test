@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin:0;}
+		#box{width:178px;height:375px;margin:200px auto;background: url(images/phone.gif);position: relative;}
+		#text{width:156px;height:250px;background: #f1f1f1;position: absolute;top:36px;left:11px;overflow: auto;}
+		#img{width:28px;height:28px;background: url(images/1.png);display: block;position: absolute;top:286px;left:11px;}
+		#text1{width:100px;height:24px;position:absolute;top:286px;left:39px;text-indent: 5px;background: none;}
+		#btn{width:28px;height:28px;position: absolute;top:286px;left:139px;}
+	</style>
+
+</head>
+<body>
+	<div id="box">
+		<div id="text"></div>
+		<span id="img"></span>
+		<input id="text1" type="text">
+		<input id="btn" type="button" value="发送">
+	</div>
+	<script>
+		var oImg = document.getElementById('img')
+		var oText = document.getElementById('text')
+		var oText1 = document.getElementById('text1')
+		var oBtn = document.getElementById('btn')
+		var numl = true;
+
+		oImg.onclick = function(){
+			if(numl){
+				oImg.style.background = 'url(images/2.png)';
+				numl = false;
+			}else{
+				oImg.style.background = 'url(images/1.png)';
+				numl = true;
+			}
+		};
+		oBtn.onclick = function(){
+			if(oText1.value == ""){
+				alert('请输入内容')
+			}else{
+				if(numl){
+					oText.innerHTML += '<div style="width:135px;overflow:hidden;margin-bottom:5px;"><img src="images/1.png" style=" width:28px;height:28px;float:left;"/><p style="width:100px;float:left;margin-left:5px;background:yellow;word-wrap:break-word;word-break:break-all;">' + oText1.value + '</p></div>'
+					oText1.value = ""
+				}else{
+					oText.innerHTML += '<div style="width:135px;overflow:hidden;margin-bottom:5px;"><img src="images/2.png" style=" width:28px;height:28px;float:right;"/><p style="width:100px;float:right;margin-left:5px;background:yellow;word-wrap:break-word;word-break:break-all;">' + oText1.value + '</p></div>'
+					oText1.value = ""
+				}
+			}
+
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		img{display: block;}
+		#box{width:940px;height:600px;margin:50px auto;overflow: hidden;position: relative;}
+		#imgs{width:940px;height:2116px;position: absolute;}
+		#box p{width:960px;line-height: 30px;text-align: center;background: black;filter: alpha(opacity=50);opacity: 0.5;color:red;position: absolute;z-index: 3;}
+		.down{bottom:0;}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var aBtn = document.getElementsByTagName('p');
+			var aImg = document.getElementById('imgs');
+			var timer = null;
+			var num = 0;
+			var height = 0;
+			aBtn[0].onmousedown = function (){
+				if(num<0){
+					num=0
+				}
+				 timer=setInterval(function(){
+				 	num+=42.32;
+				 	if(num<1516){
+				 		aImg.style.top = (-num)+"px";
+				 	}else{
+				 		aImg.style.top = -1516;
+				 	}
+				},100)
+			}
+			aBtn[0].onmouseup = function (){
+				clearInterval(timer);
+				height = num
+			}
+			aBtn[1].onmousedown = function (){
+				if(height!=0){
+					timer=setInterval(function(){
+					 	height=height-42.32;
+					 	if(height>0){
+					 		aImg.style.top = (-height)+"px";
+					 	}else{
+					 		aImg.style.top = 0;
+					 	}
+					},100)	
+				}
+			}
+			aBtn[1].onmouseup = function (){
+				clearInterval(timer);
+				num = height;
+				alert(num)
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<p>上</p>
+		<div id="imgs">
+			<img src="images/b1.jpg">
+			<img src="images/b2.jpg">
+			<img src="images/b3.jpg">
+			<img src="images/b4.jpg">
+		</div>
+		<p class="down">下</p>
+	</div>
+</body>
+</html>

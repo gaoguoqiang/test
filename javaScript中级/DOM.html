@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	/*div{padding:40px 50px; }
+	#div1{background-color: red;}
+	#div2{background-color: yellow;position: relative;}
+	#div3{background-color: blue;}*/
+
+	</style>
+	<script>
+		
+	window.onload = function(){
+
+		//var oUl = document.getElementById('ul1');
+
+		//alert( oUl.childNodes.length )
+		//alert( oUl.firstElementChild )
+		/*
+		
+		for(var i=0;i<oUl.childNodes.length;i++){
+			if(oUl.childNodes[i].nodeType==1){
+				oUl.childNodes[i].style.background = 'red';
+			}
+			
+		}
+		function oFirst(obj){
+					return obj.firstElementChild || obj.firstChild;
+				}
+		oFirst(oUl).style.background = 'blue'
+
+
+		var aA = document.getElementsByTagName('a');
+
+		for(var i=0;i<aA.length;i++){
+			aA[i].onclick = function(){
+				this.parentNode.style.display = 'none';
+			}
+		}
+		obj.chlidren()   元素的子节点集合
+
+		 */
+		//var oDiv3 = document.getElementById('div3');
+		//alert(oDiv3.parentNode.id)
+		//获取到他的父级
+		//alert(oDiv3.offsetParent.id)
+		// 离当前元素最近的有定位的父节点
+		// 如果没有定位父级，默认是body
+		// ie7以下：如果当前元素没有定位，默认父级是body，如果有定位是html
+		/*
+		obj.offsetLeft()
+		如果有定位父级     
+		ie7以下如果自己没有定位，获取到的是自己到body的距离
+		ie7以下如果自己有定位，获取到的是自己到父级的距离
+		其他：到父级的距离
+		如果没有定位父级
+		默认是html
+
+		 */
+		//alert(oDiv3.offsetLeft)
+		
+		
+		var aBtn = document.getElementsByTagName('input');
+		var oUl = document.getElementById('list');
+
+		aBtn[1].onclick = function(){
+			var oLi = document.createElement('li');
+			var oA = document.createElement('a');
+			oLi.innerHTML = aBtn[0].value;
+			oA.innerHTML = '删除';
+			oA.href = 'javascript:;';
+			oA.onclick = function(){
+				oUl.removeChild(this.parentNode);
+			}
+			if(oUl.children[0]){
+				oUl.insertBefore(oLi,oUl.children[0])
+			}else{
+				oUl.appendChild(oLi);
+			}
+			oLi.appendChild(oA);
+		}
+		//alert(oUl.children.length)
+		
+	}
+
+	</script>
+</head>
+<body id="body1">
+	<!--
+		<ul id="ul1">
+			<li>1111<a href="javascript:;">隐藏</a></li>
+			<li>2222<a href="javascript:;">隐藏</a></li>
+			<li>3333<a href="javascript:;">隐藏</a></li>
+			<li>4444<a href="javascript:;">隐藏</a></li>
+		</ul>
+	-->
+	<!--
+		<div id="div1">
+			<div id="div2">
+				<div id="div3"></div>
+			</div>
+		</div>
+	-->
+	<input type="text">
+	<input type="button" value="留言">
+	<ul id="list"></ul>
+	
+
+	
+
+</body>
+</html>

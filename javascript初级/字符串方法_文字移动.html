@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		li{list-style: none;}
+		#box{width:1000px;margin:100px auto 0;}
+		#text1{width:400px;height:450px;background:#f1f1f1;float:left;border:5px solid #666;}
+		#right{width:400px;height:450px;background:#2be77f;float:right;border:5px solid #666;}
+		#center{float:left;width:180px;text-align: center;}
+		#center h3{width:100px;background:orange;text-align: center;margin-left: 40px;}
+		#center p{margin-top: 15px;display: none;}
+		#list li{width:10px;height:10px;margin-right: 5px;background:#975dc9;float:left;}
+		#list{margin-left:45px;margin-top: 15px;opacity: 0;}
+	</style>
+	<script type="text/javascript" src="ggq.js"></script>
+	<script>
+		window.onload = function(){
+			var oText = document.getElementById('text1');
+			var oCenter = document.getElementById('center');
+			var oRight = document.getElementById('right');
+			var oBtn = oCenter.getElementsByTagName('h3')[0];
+			var oP = oCenter.getElementsByTagName('p')[0];
+			var oUl = document.getElementById('list');
+			var aLi = oUl.getElementsByTagName('li');
+			var timer = null;
+			var timer2 = null;
+			var n=0;
+			var num=0;
+			var onOff = true;
+			alert(oText.value)
+			
+			oBtn.onclick = function(){
+				alert(oText.value)
+				if(onOff&&oText.value!==''){
+					clearInterval(timer);
+					clearInterval(timer2);
+					oRight.innerHTML = '';
+					var str = oText.value;
+					var arr = str.split('');
+					opacity(oUl,0.1,1)
+					timer2 = setInterval(function(){
+						for(var i=0;i<aLi.length;i++){
+							aLi[i].style.backgroundColor = '#975dc9'
+						}
+						aLi[num].style.backgroundColor = '#4f0c88';
+						num++;
+						if(num===aLi.length){
+							num=0;
+						}
+					},100)
+					timer = setInterval(function(){
+						alert(oText.value)
+						onOff=false;
+						oText.value = str.substring(n+1)
+						oRight.innerHTML += arr[n]
+						oP.style.display = 'block';
+						oP.innerHTML = n+1+'/'+str.length;
+						n++;
+						if(n===arr.length){
+							clearInterval(timer);
+							clearInterval(timer2);
+							n=0;
+							num=0;
+							oText.value = '';
+							opacity(oUl,0.1,0)
+							onOff = true
+							alert(oText.value)
+						}
+
+					},20)
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<textarea id="text1"></textarea>
+		<div id="center">
+			<h3>文字转移</h3>
+			<p>65/98</p>
+			<ul id="list">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+		<div id="right"></div>
+	</div>
+</body>
+</html>

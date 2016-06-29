@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		div{width:200px;height:500px;background-color: red;position: absolute;}
+	</style>
+	<script>
+		window.onload = function(){
+			var aDiv = document.getElementsByTagName('div');
+			var n=0;
+			// alert(document.documentElement.clientHeight)浏览器窗口的高度
+			// alert(document.documentElement.scrollTop)当前窗口到页面顶端的高度
+			// alert(aDiv[0].offsetHeight)元素的高度
+			setInterval(function(){
+				n = document.documentElement.scrollTop;
+				aDiv[0].style.top = document.documentElement.clientHeight/2-aDiv[0].offsetHeight/2+n+'px';
+				aDiv[1].style.top = document.documentElement.clientHeight/2-aDiv[1].offsetHeight/2+n+'px';
+				aDiv[1].style.right = 0+'px'
+			},10)
+			
+			// alert(document.documentElement.clientHeight) 
+		}
+	</script>
+</head>
+<body style="height:2000px;">
+	<div></div>
+	<div></div>
+</body>
+</html>

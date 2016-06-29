@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		li{list-style: none;}
+		#center{width:1000px;margin:100px auto;position: relative;}
+		#text{width:800px;height:400px;background: #f1f1f1;}
+		#list{position: absolute;top:0;right:0;}
+		#list li{width:150px;line-height: 80px;text-align: center;background: gray;color:white;margin-bottom: 5px;display: none;}
+		#list #btn{background: black;display: block;}
+		#bottom{width:400px;height:100px;background: #f1f1f1;margin-top: 20px;margin-left:200px;position: relative;display: none;}
+		#bottom a{position: absolute;top:0;right:0;font-size: 20px;}
+		#bottom h3{float:left;margin:10px 20px;background: red;}
+		.find,.rep{position: absolute;top:50%;left:20px;display: none;}
+
+	</style>
+	<script>
+		window.onload = function(){
+			var oBtn = document.getElementById('btn');
+			var oList1 = document.getElementById('list');
+			var aLi1 = oList1.getElementsByTagName('li');
+			var oBottom = document.getElementById('bottom');
+			var aDiv = oBottom.getElementsByTagName('div');
+			var oA = oBottom.getElementsByTagName('a')[0];
+			var aH3 = oBottom.getElementsByTagName('h3');
+			var aInp1 = aDiv[0].getElementsByTagName('input');
+			var aInp2 = aDiv[1].getElementsByTagName('input');
+			var oText = document.getElementById('text');
+			var text = oText.innerHTML;
+			var onOff = true;
+			//下拉菜单
+			oBtn.onclick = function(){
+				if(onOff){
+					for(var i=1;i<aLi1.length;i++){
+						aLi1[i].style.display = 'block';
+						aLi1[i].onmouseover = function(){
+							this.style.backgroundColor = 'orange';
+						}
+						aLi1[i].onmouseout = function(){
+							this.style.backgroundColor = 'gray';
+						}
+					}
+				}else{
+					for(var i=1;i<aLi1.length;i++){
+						aLi1[i].style.display = 'none';
+					}
+				}
+				onOff=!onOff;
+			}
+			aLi1[1].onclick = function(){
+				oBottom.style.display = 'block';
+				for(var i=1;i<aLi1.length;i++){
+						aLi1[i].style.display = 'none';
+					}
+				aDiv[1].style.display = 'none';
+				aDiv[0].style.display = 'block';
+				onOff=!onOff;
+			}
+			aLi1[2].onclick = function(){
+				oBottom.style.display = 'block';
+				for(var i=1;i<aLi1.length;i++){
+						aLi1[i].style.display = 'none';
+					}
+				aDiv[0].style.display = 'none';
+				aDiv[1].style.display = 'block';
+				onOff=!onOff;
+			}
+			oA.onclick = function(){
+				oBottom.style.display = 'none';
+			}
+			for(var i=0;i<aH3.length;i++){
+				aH3[i].index = i;
+				aH3[i].onclick = function(){
+					for(var j=0;j<aH3.length;j++){
+						aH3[j].style.backgroundColor = 'red';
+						aDiv[j].style.display = 'none';
+					}
+					this.style.backgroundColor = 'orange';
+					//alert(this.index)
+					aDiv[this.index].style.display = 'block'
+				}
+			}
+			aInp1[1].onclick = function(){
+				oText.innerHTML = text;
+				var str = aInp1[0].value;
+				if(text.indexOf(str)<0&&str!==''){
+					alert("没有找到")
+				}
+				if(str===''){
+					alert('请输入内容');
+				}else if(text.indexOf(str)!=-1){
+					var arr = oText.innerHTML.split(str);
+					oText.innerHTML = arr.join('<span style="background:yellow;">'+str+'</span>');
+				}
+			}
+			aInp2[2].onclick = function(){
+				var str1 = aInp2[0].value;
+				var str2 = aInp2[1].value;
+				if(str1===''){
+					alert('请输入要替换的内容');
+				}
+				if(str1!==''&&text.indexOf(str1)==-1&&str2===''){
+					alert('对不起：没有找到您输入的内容');
+				}
+				if(str2===''&&text.indexOf(str1)!==-1&&str1!==''){
+					var btn = confirm('您确定要删除'+str1+'吗');
+					if(btn){
+						var arr = oText.innerHTML.split(str1);
+						oText.innerHTML = arr.join(str2);
+					}
+				}
+				if(text.indexOf(str1)!==-1&&str1!==''&&str2!==''){
+						var arr = oText.innerHTML.split(str1);
+						oText.innerHTML = arr.join(str2);
+				}
+				if(text.indexOf(str1)==-1&&str2!==''){
+					aInp2[0].value = '';
+					aInp2[1].value = '';
+				}
+				text = oText.innerHTML
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="center">
+		<div id="text">搜狗输入法是基于搜索引擎技术的、特别适合网民使用的、新一代的输入法产品，由于采用了搜索引擎技术，输入速度有了质的飞跃，在词库的广度、词语的准确度上，搜狗输入法都远远领先于其他输入法，用户还可以通过互联网备份自己的个性化词库和配置信息。搜狗拼音输入法为中国国内如今主流汉字拼音输入法之一，奉行永久免费的原则。
+		</div>
+		<ul id="list">
+			<li id="btn">展开</li>
+			<li>查找</li>
+			<li>替换</li>
+		</ul>
+		<div id="bottom">
+			<a>X</a>
+			<h3>查找</h3>
+			<h3>替换</h3>
+			<div class="find">
+				<input type="text">
+				<input type="button" value="查找">
+			</div>
+			<div class="rep">
+				<input type="text">
+				<input type="text">
+				<input type="button" value="替换">
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#text{width:500px;height:500px;}
+		#show{width:500px;height:500px;border:1px solid black;position: absolute;left:600px;top:10px;overflow: auto;}
+		#show div{border-bottom: 1px dashed gray;padding: 5px;overflow: hidden;filter: alpha(opacity=0);opacity: 0;}
+	</style>
+	<script src="ggq.js"></script>
+	<script>
+		window.onload = function(){
+			var oText = document.getElementById('text');
+			var oBtn = document.getElementById('btn');
+			var oShow = document.getElementById('show');
+
+			oBtn.onclick = function(){
+				var oDiv = document.createElement('div');
+				var aDiv = oShow.getElementsByTagName('div');
+				oDiv.innerHTML = oText.value;
+				oText.value = '';
+				if(aDiv.length){
+					oShow.insertBefore(oDiv,aDiv[0]);
+				}else{
+					oShow.appendChild(oDiv);
+				}
+				var height = oDiv.offsetHeight;
+				oDiv.style.height = 0;
+				startMove(oDiv,{height:height},function(){
+					startMove(oDiv,{opacity:100})
+				})
+			}
+		}
+	</script>
+</head>
+<body>
+	<textarea id="text"></textarea>
+	<input type="button" id="btn" value="发表">
+	<div id="show"></div>
+</body>
+</html>

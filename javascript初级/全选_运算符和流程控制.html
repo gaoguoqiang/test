@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0;margin:0;}
+		li{list-style: none;}
+		form{width:500px;margin:50px auto;}
+		ul li{width:500px;padding: 10px 0;}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var aBtn = document.getElementsByTagName('input');
+			var oUl = document.getElementsByTagName('ul')[0];
+			var aLi = oUl.getElementsByTagName('li');
+			var bg = ['gray','red']
+			var that = '';
+			var onOff = true;
+			for(var i=0;i<aLi.length;i++){
+				aLi[i].index1 = i;
+				aLi[i].style.background = bg[i%bg.length];
+				aLi[i].onmouseover = function(){
+					fn1()
+					that = this.style.background;
+					this.style.background = '#333'
+					
+				}
+				aLi[i].onmouseout = function(){
+					fn1()
+					this.style.background = that;
+					
+				}
+			}
+			aBtn[0].onclick = function(){
+				if(onOff){
+					for(var i=1;i<aBtn.length;i++){
+					//这是反选     
+					//aBtn[i].checked = !aBtn[i].checked
+					aBtn[i].checked = true;
+					for(var j=0;j<aLi.length;j++){
+						aLi[j].style.background = '#333';
+					}
+					onOff = false;
+				}
+				}else{
+					for(var i=1;i<aBtn.length;i++){
+						//这是反选     
+						//aBtn[i].checked = !aBtn[i].checked
+						aBtn[i].checked = false;
+						for(var j=0;j<aLi.length;j++){
+							aLi[j].style.background = bg[j%bg.length];
+						}
+					}
+					onOff = true;
+				}
+			}
+			function fn1(){//选中的变颜色
+				for(var x=0;x<aLi.length;x++){
+					if(aBtn[x+1].checked){
+						aLi[x].style.background = "#333";
+					}else{
+						aLi[x].style.background = bg[x%bg.length];
+					}
+				}
+			}
+			
+			
+			
+
+
+		}
+	</script>
+</head>
+<body>
+	<form>
+		<input type="button" value="全选">
+		<ul>
+			<li><input type="checkbox"></li>
+			<li><input type="checkbox"></li>
+			<li><input type="checkbox"></li>
+			<li><input type="checkbox"></li>
+			<li><input type="checkbox"></li>
+			<li><input type="checkbox"></li>
+			<li><input type="checkbox"></li>
+		</ul>
+	</form>
+</body>
+</html>

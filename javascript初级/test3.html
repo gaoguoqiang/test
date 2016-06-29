@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding: 0; margin: 0;}
+		body,html{width:100%height:100%;}
+		li{list-style: none;}
+		a{text-decoration: none;display: block;color:black;}
+		#box{clear:both; margin:0 auto;width:500px;}
+		h1,input{float:left;}
+		#btn{margin-top:8px;}
+		#div{width:50px; height:50px;clear:both;margin:0 auto;border:2px solid black;}
+		#div2{position: fixed;top:0;left:0;width:100%;height:100%;background: black;opacity: 0.5;display: none;}
+		.center{width:600px; height:300px;margin:0 auto;background: white;border:5px solid gray;position: absolute;top:50%;left:50%;margin-top:-305px;margin-left: -305px;}
+		.center li{overflow: hidden; width:500px;margin:10px auto ;}
+		.center li p,a{float:left;}
+		ul a{width:50px;height:50px;background: #f1f1f1;border:solid 1px gray;margin:0 10px;text-align: center;line-height: 50px;}
+		ul p{line-height: 52px;}
+		#red{background: red;}
+		#green{background: green;}
+		#blue{background: blue;}
+		#btn5,#btn6{float:left;width:100px;height:50px;background: blue;color: white;text-align: center;line-height: 50px;}
+		#btn5{margin-left: 190px;margin-right: 10px;}
+	</style>
+	<script>
+		window.onload = function(){
+			var obtn1 = document.getElementById('btn');
+			var obtn2 = document.getElementById('red');
+			var obtn3 = document.getElementById('green');
+			var obtn4 = document.getElementById('blue');
+			var obtn5 = document.getElementById('btn7');
+			var obtn6 = document.getElementById('btn8');
+			var obtn7 = document.getElementById('btn9');
+			var obtn8 = document.getElementById('btn10');
+			var obtn9 = document.getElementById('btn11');
+			var obtn10 = document.getElementById('btn12');
+			var obtn11 = document.getElementById('btn5');
+			var obtn12 = document.getElementById('btn6');
+			var obtn13 = document.getElementById('div2');
+			var obtn14 = document.getElementById('div');
+			obtn1.onclick = function(){
+				
+				obtn2.onclick = function(){
+				obtn14.style.background = 'red';
+			}
+			obtn3.onclick = function(){
+				obtn14.style.background = 'green';
+			}
+			obtn4.onclick = function(){
+				obtn14.style.background = 'blue';
+			}
+			obtn5.onclick = function(){
+				obtn14.style.width = '200px';
+			}
+			obtn6.onclick = function(){
+				obtn14.style.width = '300px';
+			}
+			obtn7.onclick = function(){
+				obtn14.style.width = '400px';
+			}
+			obtn8.onclick = function(){
+				obtn14.style.height = '200px';
+			}
+			obtn9.onclick = function(){
+				obtn14.style.height = '300px';
+			}
+			obtn10.onclick = function(){
+				obtn14.style.height = '400px';
+			}
+			obtn11.onclick = function(){
+				obtn14.style.background = 'none';
+				obtn14.style.width = '50px';
+				obtn14.style.height = '50px';
+			}
+			obtn13.style.display = 'block';
+			};
+			
+			obtn12.onclick = function(){
+				obtn13.style.display ='none';
+			}
+			
+		}
+	</script>
+
+</head>
+<body>
+	<div id="box">
+		<h1>请为下面div设置一个样式：</h1>
+		<input id="btn" type="button" value="点击设置样式">
+		<div id="div"></div>
+	</div>
+	<div id="div2">
+		<div class="center">
+			<ul>
+				<li>
+					<p>请选择背景颜色：</p>
+					<a id="red">红</a>
+					<a id="green">绿</a>
+					<a id="blue">蓝</a>
+				</li>
+				<li>
+					<p>请选择宽（PX）：</p>
+					<a id="btn7">200</a>
+					<a id="btn8">300</a>
+					<a id="btn9">400</a>
+				</li>
+				<li>
+					<p>请选择高（PX）：</p>
+					<a id="btn10">200</a>
+					<a id="btn11">300</a>
+					<a id="btn12">400</a>
+				</li>
+			</ul>
+			<a id="btn5">恢复</a>
+			<a id="btn6">确定</a>
+		</div>
+	</div>
+</body>
+</html>

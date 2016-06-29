@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oDiv = document.getElementById('div1');
+			//addClass(oDiv,'box1');
+			removeClass(oDiv,'box')
+			function addClass(obj,className){
+				if(obj.className == ''){
+					//如果原来没有class，添加class
+					obj.className = className;
+				}else{
+					//如果原来有class，要分俩种情况
+					//1：已有的class中有相同的class
+					//2：已有的class中没有相同的class
+					//把原来的class以空格拆分为一个数组
+					//判断数组中有没有相同的class
+					var arrClassName = obj.className.split(' ');
+					var _index = arrIndexOf(arrClassName,className)
+					//如果没有相同的class，添加class
+					//如果有相同的class，什么都不做
+					if(_index == -1){
+						obj.className += ' '+className;
+					}
+				}
+			}
+			function removeClass(obj,className){
+				//如果原来没有class，那就什么都不做
+				if(obj.className != ''){
+					//如果原来有class，分为俩种情况
+					//1：有要移除的class
+					//2：没有要移除的class
+					//把原来的class以空格拆分为一个数组
+					//判断数组中有没有相同的class
+					var arrClassName = obj.className.split(' ');
+					var _index = arrIndexOf(arrClassName,className);
+					if(_index != -1){
+					//如果有要移除的class
+					//在数组中移除class
+					//然后用join把数组转换为字符串
+					
+						arrClassName.splice(_index,1);
+						obj.className = arrClassName.join(' ');
+					}
+					//如果没有要移除的class，什么都不做
+				}
+			}
+			function arrIndexOf(arr,v){
+				//arr是拆分class后得到的数组
+				//v是要比较的值（className）
+				for(var i=0;i<arr.length;i++){
+					if(arr[i] == v){
+						//如果相等，返回当前数组中相等值得的位置
+						return i;
+					}
+				}
+				//如果没有相等的值，返回-1；
+				return -1;
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="div1" class="box box1 box2">123456</div>
+</body>
+</html>
